@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#"
+     xml:base="http://www.semanticweb.org/suturo/ontologies/2018/10/objects"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:hsr_objects="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#color -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#color">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#depth -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#depth">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#proportion"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#frame -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#frame">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#height -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#height">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#proportion"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#name">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#proportion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#proportion">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#size -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#size">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#type -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#type">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#w -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#w">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#width -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#width">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#proportion"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#wx -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#wx">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#wy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#wy">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#wz -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#wz">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#x -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#x">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#y -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#y">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#z -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#z">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Container -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Container">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Object -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Object"/>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Value -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Value"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable">
+        <rdf:type rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable"/>
+        <x rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.0</x>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Container"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Environmental"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Movable"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+

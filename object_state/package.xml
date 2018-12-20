@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>object_state</name>
+  <version>0.0.0</version>
+  <description>The object_state package</description>
+  <maintainer email="aniedz@cs.uni-bremen.de">Arthur Niedzwiecki</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>json_prolog</build_depend>
+  <build_depend>json_prolog_msgs</build_depend>
+  <build_depend>knowrob_common</build_depend>
+  <build_depend>rosjava_build_tools</build_depend>
+  <build_depend>rosjava_messages</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <build_export_depend>json_prolog</build_export_depend>
+  <build_export_depend>json_prolog_msgs</build_export_depend>
+  <build_export_depend>knowrob_common</build_export_depend>
+  <build_export_depend>rosjava_build_tools</build_export_depend>
+  <build_export_depend>rosjava_messages</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>json_prolog</exec_depend>
+  <exec_depend>json_prolog_msgs</exec_depend>
+  <exec_depend>knowrob_common</exec_depend>
+  <exec_depend>rosjava_build_tools</exec_depend>
+  <exec_depend>rosjava_messages</exec_depend>
+  <exec_depend>rospy</exec_depend>
+
+</package>

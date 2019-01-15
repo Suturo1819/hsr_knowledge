@@ -8,6 +8,10 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:hsr_objects="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects"/>
+    <owl:Ontology rdf:about="http://www.ease.org/ont/EASE.owl">
+        <!--owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/-->
+        <owl:imports rdf:resource="http://knowrob.org/kb/knowrob.owl"/>
+    </owl:Ontology>
     
 
 
@@ -105,6 +109,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#translation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#translation">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#objectvalues"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#type -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#type">
@@ -158,6 +170,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#x">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#pose"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
 

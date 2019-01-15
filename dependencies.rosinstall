@@ -7,3 +7,7 @@
     local-name: knowrob
     uri: https://github.com/knowrob/knowrob.git
     version: master
+- git:
+    local-name: suturo_msgs
+    uri: https://github.com/Suturo1819/suturo_msgs.git
+    version: master

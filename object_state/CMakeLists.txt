@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   rosjava_build_tools
   rosjava_messages
   rospy
+  suturo_perception_msgs
 )
 
 ## System dependencies are found with CMake's conventions

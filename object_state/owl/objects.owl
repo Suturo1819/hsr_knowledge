@@ -10,7 +10,8 @@
     <owl:Ontology rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects"/>
     <owl:Ontology rdf:about="http://www.ease.org/ont/EASE.owl">
         <!--owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/-->
-        <owl:imports rdf:resource="http://knowrob.org/kb/knowrob.owl"/>
+        <!--owl:imports rdf:resource="http://knowrob.org/kb/knowrob.owl"/-->
+        <owl:imports rdf:resource="http://knowrob.org/kb/knowrob_objects.owl"/>
     </owl:Ontology>
     
 

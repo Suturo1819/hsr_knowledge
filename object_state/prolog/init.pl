@@ -6,18 +6,17 @@
 
 
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
-:- rdf_db:rdf_register_ns(dul, 'http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#', [keep(true)]).
+%:- rdf_db:rdf_register_ns(dul, 'http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#', [keep(true)]).
 
+:- use_module(library('semweb/rdf_db')).
+:- use_module(library('semweb/rdfs')).
+:- use_module(library('semweb/owl_parser')).
+:- use_module(library('semweb/owl')).
+:- use_module(library('knowrob/computable')).
+:- use_module(library('knowrob/temporal')).
+:- use_module(library('knowrob/owl')).
 
-%:- use_module(library('prolog_object_state')).
-%:- use_module(library('prolog_object_state_getter_setter')).
-%:- use_module(library('prolog_object_state_util')).
-%:- use_module(library('prolog_object_state_close')).
-%:- use_module(library('test_calls')).
-%:- use_module(library('srdl2')).
-%:- use_module(library('knowrob_owl')).
-%:- use_module(library('swrl')).
-%:- use_module(library('owl_computable')).
+:- use_module(library('object_state')).
 
 :- owl_parse('package://knowrob_common/owl/knowrob.owl').
 :- owl_parse('package://knowrob_common/owl/knowrob_common.owl').

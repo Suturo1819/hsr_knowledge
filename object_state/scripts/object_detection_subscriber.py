@@ -23,30 +23,32 @@ def callback(currObj):
     #     or (is_near_list(currObj, object_map[currObj.name]) == -1) 
     #     or (last_update_map[currObj.name].to_nsec() < rospy.Time.now().to_nsec() - TIMEOUT)):
     #         before = time.time()
-    #         query = prolog.query("create_object_state_with_close('" 
-    #                         + currObj.name+"', [ ["
-    #                         + str(currObj.pose.pose.position.x) + "," 
-    #                         + str(currObj.pose.pose.position.y) + "," 
-    #                         + str(currObj.pose.pose.position.z) + "],["
-    #                         + str(currObj.pose.pose.orientation.x) + "," 
-    #                         + str(currObj.pose.pose.orientation.y) + "," 
-    #                         + str(currObj.pose.pose.orientation.z) + "," 
-    #                         + str(currObj.pose.pose.orientation.w) + "] ], " 
-    #                         + currObj.name + ",'" + str(currObj.pose.header.frame_id) + "',"
-    #                         + str(currObj.width) + "," + str(currObj.height) + "," + str(currObj.depth) + ", [" 
-    #                         + str(currObj.pose.header.stamp)+ "],  ObjInst)")
-    #         rospy.loginfo('Send query')
-    #         for solution in query.solutions():
-    #             rospy.loginfo('Found solution.')
-    #         query.finish()
-    #         rospy.loginfo('Took: ' + str(time.time() - before))
-    #         if (not currObj.name in object_map):
-    #             object_map[currObj.name] = [currObj]
-    #         elif (index_of_is_near == -1):
-    #             object_map[currObj.name].append(currObj)
-    #         else:
-    #             object_map[index_of_is_near] = currObj
-    #         last_update_map[currObj.name] = rospy.Time.now()
+    query = prolog.query("create_object(knowrob:'Sink', Instance)")
+            # query = prolog.query("create_object_state_with_close('" 
+            #                 + currObj.name+"', [ ["
+            #                 + str(currObj.pose.pose.position.x) + "," 
+            #                 + str(currObj.pose.pose.position.y) + "," 
+            #                 + str(currObj.pose.pose.position.z) + "],["
+            #                 + str(currObj.pose.pose.orientation.x) + "," 
+            #                 + str(currObj.pose.pose.orientation.y) + "," 
+            #                 + str(currObj.pose.pose.orientation.z) + "," 
+            #                 + str(currObj.pose.pose.orientation.w) + "] ], " 
+            #                 + currObj.name + ",'" + str(currObj.pose.header.frame_id) + "',"
+            #                 + str(currObj.width) + "," + str(currObj.height) + "," + str(currObj.depth) + ", [" 
+            #                 + str(currObj.pose.header.stamp)+ "],  ObjInst)")
+    rospy.loginfo('Send query')
+    for solution in query.solutions():
+        rospy.loginfo('Found solution.')
+    query.finish()
+    #sleep(2)
+            # rospy.loginfo('Took: ' + str(time.time() - before))
+            # if (not currObj.name in object_map):
+            #     object_map[currObj.name] = [currObj]
+            # elif (index_of_is_near == -1):
+            #     object_map[currObj.name].append(currObj)
+            # else:
+            #     object_map[index_of_is_near] = currObj
+            # last_update_map[currObj.name] = rospy.Time.now()
 
 
 def is_near_list(currObj, oldObjList):

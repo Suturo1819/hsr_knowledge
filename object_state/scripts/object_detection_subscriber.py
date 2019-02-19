@@ -17,13 +17,24 @@ TIMEOUT = 65666666
 POSE_DISTANCE = 0.03
 QUAT_DISTANCE = 0.03
 
-def callback(currObj):
-    rospy.loginfo(currObj.name)
+def callback(perceivedObject):
+    rospy.loginfo(perceivedObject.name)
+
     # if ((not currObj.name in object_map) 
     #     or (is_near_list(currObj, object_map[currObj.name]) == -1) 
     #     or (last_update_map[currObj.name].to_nsec() < rospy.Time.now().to_nsec() - TIMEOUT)):
     #         before = time.time()
-    query = prolog.query("create_object(knowrob:'Sink', Instance)")
+
+    query = prolog.query("object_at(knowrob:'Cup',"
+                    + "[" + str(perceivedObject.pose.header.frame_id) + ", _,"
+                    + "[" + str(perceivedObject.pose.pose.position.x) + ","
+                    + str(perceivedObject.pose.pose.position.y) + ","
+                    + str(perceivedObject.pose.pose.position.z) + "],"
+                    + "[" + str(perceivedObject.pose.pose.orientation.x) + ","
+                    + str(perceivedObject.pose.pose.orientation.y) + ","
+                    + str(perceivedObject.pose.pose.orientation.z) + ","
+                    + str(perceivedObject.pose.pose.orientation.w) + "]], ObjectInstance).")
+
             # query = prolog.query("create_object_state_with_close('" 
             #                 + currObj.name+"', [ ["
             #                 + str(currObj.pose.pose.position.x) + "," 
@@ -37,9 +48,13 @@ def callback(currObj):
             #                 + str(currObj.width) + "," + str(currObj.height) + "," + str(currObj.depth) + ", [" 
             #                 + str(currObj.pose.header.stamp)+ "],  ObjInst)")
     rospy.loginfo('Send query')
-    for solution in query.solutions():
-        rospy.loginfo('Found solution.')
+    solution = query.solutions()
+    rospy.loginfo(str(solution))
     query.finish()
+
+    # for solution in query.solutions():
+    #     rospy.loginfo('Found solution.')
+    # query.finish()
     #sleep(2)
             # rospy.loginfo('Took: ' + str(time.time() - before))
             # if (not currObj.name in object_map):
@@ -66,7 +81,7 @@ def is_near(currObj, oldObj):
         and (abs(currObj.pose.pose.orientation.x - oldObj.pose.pose.orientation.x) <= QUAT_DISTANCE) 
         and (abs(currObj.pose.pose.orientation.y - oldObj.pose.pose.orientation.y) <= QUAT_DISTANCE) 
         and (abs(currObj.pose.pose.orientation.z - oldObj.pose.pose.orientation.z) <= QUAT_DISTANCE) 
-        and (abs(currObj.pose.pose.orientation.w - oldObj.pose.pose.orientation.w) <= QUAT_DISTANCE))
+        and (abs(currObj.pose.pose.orientation.w - oldObj.pose.pose.orienattion.w) <= QUAT_DISTANCE))
     
 def listener():
     # In ROS, nodes are uniquely named. If two nodes with the same

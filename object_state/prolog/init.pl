@@ -19,5 +19,5 @@
 :- use_module(library('object_state')).
 
 :- owl_parse('package://knowrob_common/owl/knowrob.owl').
-:- owl_parse('package://knowrob_common/owl/knowrob_common.owl').
+%:- owl_parse('package://knowrob_common/owl/knowrob_common.owl').
 :- owl_parse('package://object_state/owl/objects.owl').

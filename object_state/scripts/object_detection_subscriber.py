@@ -16,17 +16,27 @@ def callback(perceivedObject):
     #     or (is_near_list(currObj, object_map[currObj.name]) == -1) 
     #     or (last_update_map[currObj.name].to_nsec() < rospy.Time.now().to_nsec() - TIMEOUT)):
     #         before = time.time()
+    obj_class = str(perceivedObject.obj_class)
+    if obj_class:
+        obj_class = obj_class[0].upper() + obj_class[1:]
+    else:
+        obj_class = "Cup"
+    confidence = str(perceivedObject.confidence)
+    shape = str(perceivedObject.shape)
     source_frame = "map" # str(perceivedObject.pose.header.frame_id)
     x = str(perceivedObject.pose.pose.position.x)
     y = str(perceivedObject.pose.pose.position.y)
     z = str(perceivedObject.pose.pose.position.z)
-    qx = str(perceivedObject.pose.pose.orientation.x)
-    qy = str(perceivedObject.pose.pose.orientation.y)
-    qz = str(perceivedObject.pose.pose.orientation.z)
-    qw = str(perceivedObject.pose.pose.orientation.w)
+    qx = "0" #str(perceivedObject.pose.pose.orientation.x)
+    qy = "0" #str(perceivedObject.pose.pose.orientation.y)
+    qz = "0" #str(perceivedObject.pose.pose.orientation.z)
+    qw = "1" #str(perceivedObject.pose.pose.orientation.w)
+    
+
     threshold = "0.15"
 
-    query_string = ("object_at(knowrob:'Cup',"
+
+    query_string = ("object_at(knowrob:'" + obj_class + "',"
                     "['" + source_frame + "', _, [" + x + "," + y + "," + z + "]," 
                     "[" + qx + "," + qy + "," + qz + "," + qw + "]]," 
                     + threshold + ", ObjectInstance).")

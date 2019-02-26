@@ -1,4 +1,4 @@
-# knowledge
+# hsr_knowledge
 
 This is the knowledge implementation of the SUTURO1819 project.
 

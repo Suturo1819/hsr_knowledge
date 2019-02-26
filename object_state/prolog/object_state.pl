@@ -31,6 +31,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
 
+object_at(ObjectType, Transform, Threshold, Instance) :-
+	belief_existing_object_at(ObjectType, Transform, Threshold, Instance),
+	belief_class_of(Instance, ObjectType).
+
 object_at_table(Instance) :-
 	object_at(_, ['map', _, [1,0,0.8],[0,0,0,1]], 0.4, Instance).
 
@@ -41,15 +45,12 @@ object_of_type(ObjectType, Instance) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-table_transform :- 
-	[_, _, [0,0,2],[0,0,0,1]].
-
-create_object(ObjectType, Instance):-
+create_object(ObjectType, Instance) :-
 	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
 	belief_new_object(ObjectType, Instance).
 
-object_at(ObjectType, Transform, Threshold, Instance):-
-	belief_perceived_at(ObjectType, Transform, Threshold, Instance).
+
+
 
 
 

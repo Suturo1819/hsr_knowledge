@@ -32,7 +32,7 @@
 %% Interface predicates %%
 
 object_at_table(Instance) :-
-	object_at(_, ['map', _, [-1,1,0.8],[0,0,0,1]], 0.4, Instance).
+	object_at(_, ['map', _, [1,0,0.8],[0,0,0,1]], 0.4, Instance).
 
 object_of_type(ObjectType, Instance) :-
 	belief_existing_objects(Instance, [ObjectType]).

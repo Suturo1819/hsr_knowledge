@@ -6,9 +6,9 @@
       test_belief/0,
       spawn_on_table/0,
       clear/0,
-      table_transform/0,
       object_at_table/1,
-      object_of_type/2
+      object_of_type/2,
+      create_object_at/4
     ]).
 
 /*:- use_module(library('lists')).
@@ -26,7 +26,8 @@
 			object_at_table(?),
 			object_of_type(r,?),
 			test_belief,
-			spawn_on_table.
+			spawn_on_table,
+			create_object_at(r,r,r,?).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
@@ -49,6 +50,9 @@ create_object(ObjectType, Instance) :-
 	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
 	belief_new_object(ObjectType, Instance).
 
+
+create_object_at(ObjectType, Transform, Threshold, Instance) :-
+	belief_perceived_at(ObjectType, Transform, Threshold, Instance).
 
 
 

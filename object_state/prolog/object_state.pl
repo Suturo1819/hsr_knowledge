@@ -8,7 +8,8 @@
       clear/0,
       object_at_table/1,
       object_of_type/2,
-      create_object_at/4
+      create_object_at/4,
+      semantically_closest_object/2
     ]).
 
 /*:- use_module(library('lists')).
@@ -27,7 +28,8 @@
 			object_of_type(r,?),
 			test_belief,
 			spawn_on_table,
-			create_object_at(r,r,r,?).
+			create_object_at(r,r,r,?),
+			semantically_closest_object(r,r).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
@@ -46,6 +48,8 @@ object_of_type(ObjectType, Instance) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%object_dimensions(Obj, Depth, Width, Height)
+
 create_object(ObjectType, Instance) :-
 	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
 	belief_new_object(ObjectType, Instance).
@@ -55,7 +59,13 @@ create_object_at(ObjectType, Transform, Threshold, Instance) :-
 	belief_perceived_at(ObjectType, Transform, Threshold, Instance).
 
 
-
+%% Object = the object type
+%% Instance = the returned other closest objects type
+semantically_closest_object(ObjectType, OtherType) :-
+	owl_class_of(ObjectType, SuperType),
+	not (SuperType = knowrob:'Thing'),
+	owl_class_of(OtherType, SuperType).
+	
 
 
 spawn_on_table :-

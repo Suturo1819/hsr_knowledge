@@ -17,7 +17,10 @@ def callback(perceivedObjectList):
 
         obj_class = str(perceivedObject.obj_class)
         if obj_class:
-            obj_class = obj_class[0].upper() + obj_class[1:]
+            splits = obj_class.split('_') #snakecase to upper camelcase
+            obj_class = ''.join(x.title() for x in splits)
+            if obj_class in ["Tomato", "Potato", "BellPepper"]:
+                obj_class += "-Foodstuff"
         else:
             obj_class = "Cup"
             

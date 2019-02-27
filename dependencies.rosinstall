@@ -5,7 +5,7 @@
 - git:
     local-name: knowrob
     uri: https://github.com/knowrob/knowrob.git
-    version: kinetic
+    version: 7fa6e074a6af312bc235d5ede5d092921af61095
 - git:
     local-name: suturo_msgs
     uri: https://github.com/Suturo1819/suturo_msgs.git

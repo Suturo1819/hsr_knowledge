@@ -8,8 +8,8 @@
       clear/0,
       object_at_table/1,
       object_of_type/2,
-      create_object_at/4,
-      semantically_closest_object/2
+      %semantically_closest_object/2,
+      create_object_at/4
     ]).
 
 /*:- use_module(library('lists')).
@@ -28,15 +28,16 @@
 			object_of_type(r,?),
 			test_belief,
 			spawn_on_table,
-			create_object_at(r,r,r,?),
-			semantically_closest_object(r,r).
+			%semantically_closest_object(r,?),
+			create_object_at(r,r,r,?).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
 
 object_at(ObjectType, Transform, Threshold, Instance) :-
-	belief_existing_object_at(ObjectType, Transform, Threshold, Instance),
-	belief_class_of(Instance, ObjectType).
+	belief_existing_objects(Objectlist),
+	member(Instance, Objectlist),
+	belief_existing_object_at(ObjectType, Transform, Threshold, Instance).
 
 object_at_table(Instance) :-
 	object_at(_, ['map', _, [1,0,0.8],[0,0,0,1]], 0.4, Instance).
@@ -61,10 +62,10 @@ create_object_at(ObjectType, Transform, Threshold, Instance) :-
 
 %% Object = the object type
 %% Instance = the returned other closest objects type
-semantically_closest_object(ObjectType, OtherType) :-
+/*semantically_closest_object(ObjectType, OtherType) :-
 	owl_class_of(ObjectType, SuperType),
 	not (SuperType = knowrob:'Thing'),
-	owl_class_of(OtherType, SuperType).
+	owl_class_of(OtherType, SuperType).*/
 	
 
 

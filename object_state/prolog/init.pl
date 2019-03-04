@@ -15,8 +15,10 @@
 :- use_module(library('knowrob/computable')).
 :- use_module(library('knowrob/temporal')).
 :- use_module(library('knowrob/owl')).
+:- use_module(library('knowrob/owl_export')).
 
 :- use_module(library('object_state')).
+:- use_module(library('static_preset')).
 
 :- owl_parse('package://knowrob_common/owl/knowrob.owl').
 %:- owl_parse('package://knowrob_common/owl/knowrob_common.owl').

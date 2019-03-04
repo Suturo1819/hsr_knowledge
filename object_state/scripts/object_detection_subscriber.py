@@ -46,10 +46,12 @@ def callback(perceived_object_list):
 
         threshold = "0.05"
 
-        query_string = ("create_object_at(knowrob:'" + obj_class + "',"
-                                                                   "['" + source_frame + "', _, [" + x + "," + y + "," + z + "],"
-                                                                                                                             "[" + qx + "," + qy + "," + qz + "," + qw + "]],"
-                        + threshold + ", ObjectInstance).")
+        query_string = ("create_object_at(knowrob:'" +
+                        obj_class + "'," +
+                        "['" + source_frame +
+                        "', _, [" + x + "," + y + "," + z + "]," +
+                        "[" + qx + "," + qy + "," + qz + "," + qw + "]]," +
+                        threshold + ", ObjectInstance).")
 
         rospy.loginfo('Send query: \n' + query_string)
 

@@ -5,8 +5,10 @@ import rospy
 from yaml import load
 from rosparam import upload_params
 import rospkg
+from json_prolog import json_prolog
 
 rospack = rospkg.RosPack()
+prolog = json_prolog.Prolog()
 
 
 def load_rs_yaml_to_parameters():

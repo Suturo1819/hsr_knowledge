@@ -22,6 +22,6 @@ A more adventurous predicate can be useful to find objects at different location
 
 `object_at(knowrob:'Cup', ['map', _, [-1,1,0.8],[0,0,0,1]], 0.4, Instance).` This will give you all the instances of type Cup within a 0.4 meter distance from (-1, 1, 0.8). Make the first argument a wildcard `_` if you don't care about the type.
 
-# Ontology
+## Ontology
 
 Use the ROS-Protege version from Daniel, to load ontologies, that reference ros-packages. https://github.com/Suturo1819/ros-protege.git

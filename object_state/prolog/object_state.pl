@@ -9,7 +9,8 @@
       object_at_table/1,
       object_of_type/2,
       %semantically_closest_object/2,
-      create_object_at/4
+      create_object_at/4,
+      hsr_existing_objects/1
     ]).
 
 /*:- use_module(library('lists')).
@@ -29,7 +30,8 @@
 			test_belief,
 			spawn_on_table,
 			%semantically_closest_object(r,?),
-			create_object_at(r,r,r,?).
+			create_object_at(r,r,r,?),
+			hsr_existing_objects(?).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
@@ -47,6 +49,17 @@ object_of_type(ObjectType, Instance) :-
 
 %% Interface predicates %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%belief_new_object(hsr_objects:'Device', Inst),
+%X = 0.7, atom_number(X_atom,X),
+%object_assert_color(Inst, [X,X,X]),
+%belief_at_update(Inst, [map, _, [1,1,1],[0,0,0,1]]).
+
+hsr_existing_objects(Objects) :-
+    belief_existing_objects(Objects, ['http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized']).
+
 
 
 %object_dimensions(Obj, Depth, Width, Height)

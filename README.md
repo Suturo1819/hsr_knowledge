@@ -10,7 +10,7 @@ Run the Prolog interpreter with `rosrun rosprolog rosprolog object_state`.
 
 Launch the robot, since the object state ublisher needs a map frame. The hsr can be in standby though.
 
-`roslaunch object_state object_state.launch` launches the beliefstate of the hsr objects, the object_state_publisher and the perception subscriber. The subscriber listens to the topic `/suturo_perception/object_detection`, decodes the message and asserts it into the beliefstate.
+`roslaunch object_state object_state.launch` launches the beliefstate of the hsr objects, the object_state_publisher and the perception subscriber. The subscriber listens to the topic `/hsr_perception/results`, decodes the message and asserts it into the beliefstate.
 
 Through json_prolog queries you can obtain the data:
 
@@ -21,3 +21,7 @@ Through json_prolog queries you can obtain the data:
 A more adventurous predicate can be useful to find objects at different locations:
 
 `object_at(knowrob:'Cup', ['map', _, [-1,1,0.8],[0,0,0,1]], 0.4, Instance).` This will give you all the instances of type Cup within a 0.4 meter distance from (-1, 1, 0.8). Make the first argument a wildcard `_` if you don't care about the type.
+
+# Ontology
+
+Use the ROS-Protege version from Daniel, to load ontologies, that reference ros-packages. https://github.com/Suturo1819/ros-protege.git

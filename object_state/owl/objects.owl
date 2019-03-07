@@ -9,7 +9,7 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:hsr_objects="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects">
-        <owl:imports rdf:resource="http://knowrob.org/kb/knowrob.owl"/>
+        <owl:imports rdf:resource="package://knowrob_common/owl/knowrob.owl"/>
     </owl:Ontology>
     
 
@@ -25,10 +25,16 @@
     
 
 
+    <!-- http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized -->
+
+    <owl:Class rdf:about="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Abstractform -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Abstractform">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -36,7 +42,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Accessoryitem -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Accessoryitem">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -90,18 +96,45 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bottle -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Binder -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bottle">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Binder">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Officestuff"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Can -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bowl -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Can">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bowl">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Breakfastcereal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Breakfastcereal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodbox"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Calculator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Calculator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Device"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Electricstuff"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Officestuff"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Camera -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Camera">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Device"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Electricstuff"/>
     </owl:Class>
     
 
@@ -110,14 +143,6 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cellphone">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Electricstuff"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cerealbox -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cerealbox">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodbox"/>
     </owl:Class>
     
 
@@ -165,7 +190,31 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Device -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Device">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dinnerplate -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dinnerplate">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingbottle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingbottle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingcan -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingcan">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
 
@@ -178,10 +227,18 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Ediblemushroom -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Ediblemushroom">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Electricstuff -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Electricstuff">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -207,6 +264,22 @@
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodbox">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Spatialform"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodcan -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodcan">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodjar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodjar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
     </owl:Class>
     
 
@@ -279,7 +352,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Hygienestuff -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Hygienestuff">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -288,14 +361,6 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Instantnoodles">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Processedfood"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Jar -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Jar">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
     </owl:Class>
     
 
@@ -325,9 +390,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lemon -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lime -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lemon">
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lime">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
     </owl:Class>
     
@@ -349,14 +414,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Mushroom -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Mushroom">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood">
@@ -365,9 +422,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Notebookpaperblock -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Notebook -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Notebookpaperblock">
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Notebook">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Officestuff"/>
     </owl:Class>
     
@@ -376,7 +433,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Nourishmentstuff -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Nourishmentstuff">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -384,7 +441,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Officestuff -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Officestuff">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -421,10 +478,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Plate -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pitcher -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Plate">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pitcher">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
 
@@ -456,6 +513,14 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rarelymoved -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rarelymoved">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems">
         <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
     </owl:Class>
     
@@ -496,7 +561,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sodacan -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sodacan">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Can"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingcan"/>
     </owl:Class>
     
 
@@ -592,7 +657,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vessel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vessel">
-        <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -600,7 +665,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Waterbottle -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Waterbottle">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bottle"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingbottle"/>
     </owl:Class>
 </rdf:RDF>
 

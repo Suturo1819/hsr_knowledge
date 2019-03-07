@@ -58,14 +58,14 @@ object_of_type(ObjectType, Instance) :-
 %belief_at_update(Inst, [map, _, [1,1,1],[0,0,0,1]]).
 
 hsr_existing_objects(Objects) :-
-    belief_existing_objects(Objects, ['http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized']).
+    belief_existing_objects(Objects, [hsr_objects:'Robocupitems']).
 
 
 
 %object_dimensions(Obj, Depth, Width, Height)
 
 create_object(ObjectType, Instance) :-
-	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
+%	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
 	belief_new_object(ObjectType, Instance).
 
 

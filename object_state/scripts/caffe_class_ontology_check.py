@@ -6,7 +6,6 @@ import yaml
 import rospkg
 from json_prolog import json_prolog
 
-
 rospack = rospkg.RosPack()
 prolog = json_prolog.Prolog()
 
@@ -21,8 +20,10 @@ def transform_caffe_config_yaml(package='object_state', path='/example_perceptio
         with open(file_path, "r") as file:
             content = file.read().replace('%YAML:1.0', '')
             caffe_splits_map = yaml.load(content)
+    else:
+        rospy.logerr('File ' + path + ' in package ' + package + 'does not exist.')
 
-    output_yaml = []
+    output_yaml = dict()
     output_yaml['classes'] = []
 
     for c in caffe_splits_map['classes']:

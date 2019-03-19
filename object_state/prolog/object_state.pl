@@ -58,7 +58,7 @@ object_of_type(ObjectType, Instance) :-
 %belief_at_update(Inst, [map, _, [1,1,1],[0,0,0,1]]).
 
 hsr_existing_objects(Objects) :-
-    belief_existing_objects(Objects, [hsr_objects:'Robocupitems']).
+    belief_existing_objects(Objects, [hsr_objects:'Robocupthings']).
 
 
 

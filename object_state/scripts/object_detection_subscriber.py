@@ -2,7 +2,6 @@
 
 import rospy
 from json_prolog import json_prolog
-# from suturo_perception_msgs.msg import ObjectDetectionData
 from suturo_perception_msgs.msg import PerceiveActionResult
 
 prolog = json_prolog.Prolog()
@@ -25,8 +24,7 @@ def callback(perceived_object_list):
 
         obj_class = str(perceivedObject.obj_class)
         if obj_class:
-            splits = obj_class.split('_')  # snakecase to upper camelcase
-            obj_class = map_class_name(''.join(x.title() for x in splits))
+            obj_class = obj_class.capitalize().replace('_', '')
         else:
             rospy.loginfo("The given class name" + obj_class + "is empty. Setting to CUP.")
             obj_class = "Cup"

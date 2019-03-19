@@ -204,14 +204,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cupboard -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cupboard">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Furniture"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cylinder -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cylinder">
@@ -353,7 +345,8 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Furniture -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Furniture">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rarelymoved"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Place"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
     </owl:Class>
     
 
@@ -543,6 +536,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Place -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Place">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupthings"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pliers -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pliers">
@@ -567,17 +568,17 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rarelymoved -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rarelymoved">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupthings"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupthings -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupitems">
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Robocupthings">
         <rdfs:subClassOf rdf:resource="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
     </owl:Class>
     
@@ -603,6 +604,22 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Shampoo">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Hygienestuff"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Shelf -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Shelf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Furniture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Shelffloor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Shelffloor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Furniture"/>
     </owl:Class>
     
 

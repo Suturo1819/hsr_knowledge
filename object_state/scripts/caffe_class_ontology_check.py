@@ -10,7 +10,7 @@ rospack = RosPack()
 prolog = json_prolog.Prolog()
 
 
-def check_caffe_config_yaml(package='object_state', path='/example_perception.yaml'):
+def check_caffe_config_yaml(package='object_state', path='/uw_rgbd_dataset_robocup_new_classes.yaml'):
     rospy.loginfo("Waiting for json_prolog.")
     rospy.wait_for_service('/json_prolog/query')
     file_path = rospack.get_path(package) + path

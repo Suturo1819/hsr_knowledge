@@ -23,21 +23,27 @@
 :- use_module(library('knowrob/transforms')).
 :- use_module(library('knowrob/objects')).
 */
-:- rdf_meta create_object(r,?),
-			object_at(r,r,r,?),
-			object_at_table(?),
-			object_of_type(r,?),
-			test_belief,
-			spawn_on_table,
-			%semantically_closest_object(r,?),
-			create_object_at(r,r,r,?),
-			hsr_existing_objects(?).
+
+:- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
+:- rdf_db:rdf_register_ns(robocup, 'http://knowrob.org/kb/robocup.owl#', [keep(true)]).
+:- rdf_db:rdf_register_ns(srdl2_comp, 'http://knowrob.org/kb/srdl2-comp.owl#', [keep(true)]).
+
+:- rdf_meta
+    create_object(r,?),
+	object_at(r,r,r,?),
+	object_at_table(?),
+	object_of_type(r,?),
+	test_belief,
+	spawn_on_table,
+	%semantically_closest_object(r,?),
+	create_object_at(r,r,r,?),
+	hsr_existing_objects(?).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
 
 object_at(ObjectType, Transform, Threshold, Instance) :-
-	belief_existing_objects(Objectlist),
+	hsr_existing_objects(Objectlist),
 	member(Instance, Objectlist),
 	belief_existing_object_at(ObjectType, Transform, Threshold, Instance).
 
@@ -83,13 +89,13 @@ create_object_at(ObjectType, Transform, Threshold, Instance) :-
 
 
 spawn_on_table :-
-	belief_perceived_at(knowrob:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _).
+	new_perceived_at(hsr_objects:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _).
 
 
 test_belief :-
-	belief_perceived_at(knowrob:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _),
+	belief_perceived_at(hsr_objects:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _),
 	object_at_table(Instance),
-	object_of_type(knowrob:'Cup', Instances),
+	object_of_type(hsr_objects:'Cup', Instances),
 	member(Instance,Instances),
 	clear.
 

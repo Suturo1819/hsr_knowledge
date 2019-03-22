@@ -10,7 +10,27 @@
      xmlns:hsr_objects="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects">
         <owl:imports rdf:resource="package://knowrob_common/owl/knowrob.owl"/>
+        <owl:imports rdf:resource="package://iai_hsr_robocup/owl/HSR_robocup.owl"/>
     </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#SupportedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#SupportedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
     
 
 

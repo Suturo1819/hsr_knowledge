@@ -26,9 +26,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#SupportedBy -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#supportedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#SupportedBy">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#supportedBy">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </owl:ObjectProperty>
     

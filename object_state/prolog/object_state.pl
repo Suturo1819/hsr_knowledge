@@ -39,6 +39,11 @@
 	create_object_at(r,r,r,?),
 	hsr_existing_objects(?).
 
+
+hsr_existing_objects(Objects) :-
+    belief_existing_objects(Objects, [hsr_objects:'Robocupthings']).
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface predicates %%
 
@@ -63,8 +68,6 @@ object_of_type(ObjectType, Instance) :-
 %object_assert_color(Inst, [X,X,X]),
 %belief_at_update(Inst, [map, _, [1,1,1],[0,0,0,1]]).
 
-hsr_existing_objects(Objects) :-
-    belief_existing_objects(Objects, [hsr_objects:'Robocupthings']).
 
 
 

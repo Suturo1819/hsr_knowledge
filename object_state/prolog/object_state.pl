@@ -35,7 +35,6 @@
 	object_of_type(r,?),
 	test_belief,
 	spawn_on_table,
-	%semantically_closest_object(r,?),
 	create_object_at(r,r,r,?),
 	hsr_existing_objects(?).
 
@@ -68,18 +67,13 @@ object_of_type(ObjectType, Instance) :-
 %object_assert_color(Inst, [X,X,X]),
 %belief_at_update(Inst, [map, _, [1,1,1],[0,0,0,1]]).
 
-
-
-
-%object_dimensions(Obj, Depth, Width, Height)
-
 create_object(ObjectType, Instance) :-
 %	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
 	belief_new_object(ObjectType, Instance).
 
 
 create_object_at(ObjectType, Transform, Threshold, Instance) :-
-	belief_perceived_at(ObjectType, Transform, Threshold, Instance).
+	new_perceived_at(ObjectType, Transform, Threshold, Instance).
 
 
 %% Object = the object type

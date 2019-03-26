@@ -52,17 +52,16 @@ assert_object_on(Instance, Surface) :-
     rdf_assert(Instance, hsr_objects:'supportedBy', Surface).
 
 all_srdl_objects(Surfaces) :-
-    findall(Surfaces,
-        rdfs_individual_of(Surfaces, srdl2_comp:'UrdfLink'),
+    findall(Surface,
+        rdfs_individual_of(Surface, srdl2_comp:'UrdfLink'),
         Surfaces).
 
 shelf_floors(ShelfFloors) :-
-    findall(ShelfFloors, (
+    findall(ShelfFloor, (
         all_srdl_objects(Surfaces),
-        member(ShelfFloors, Surfaces),
-        rdf_has(ShelfFloors, srdl2_comp:'urdfName', literal(UrdfName)),
-        string_to_atom(AsString,UrdfName),
-        sub_string(AsString, 0, 11, _, 'shelf_floor')
+        member(ShelfFloor, Surfaces),
+        rdf_has_prolog(ShelfFloor, srdl2_comp:'urdfName', UrdfName),
+        atom_concat('shelf_floor',_,UrdfName)
         ), ShelfFloors).
 
 all_objects_in_whole_shelf(Instance) :-
@@ -83,6 +82,7 @@ surface_size(Instance, Size) :-
 test_surfaces :-
     owl_instance_from_class(hsr_objects:'Other', Instance),
     Shelf = 'http://knowrob.org/kb/robocup.owl#kitchen_description_shelf_floor_1_piece',
+    %rdf_equal(Shelf, robocup:'kitchen_description_shelf_floor_1_piece')
     assert_object_on(Instance, Shelf),
     rdfs_individual_of(Shelf, srdl2_comp:'UrdfLink'),
     objects_on_surface(Objects, Shelf),

@@ -26,8 +26,8 @@ def callback(perceived_object_list):
         if obj_class:
             obj_class = obj_class.capitalize().replace('_', '')
         else:
-            rospy.loginfo("The given class name" + obj_class + "is empty. Setting to CUP.")
-            obj_class = "Cup"
+            rospy.loginfo("The given class name" + obj_class + "is empty. Setting to OTHER.")
+            obj_class = "Other"
 
         confidence = str(perceivedObject.confidence)
         shape = str(perceivedObject.shape)
@@ -44,7 +44,7 @@ def callback(perceived_object_list):
 
         threshold = "0.05"
 
-        query_string = ("create_object_at(knowrob:'" +
+        query_string = ("create_object_at(hsr_objects:'" +
                         obj_class + "'," +
                         "['" + source_frame +
                         "', _, [" + x + "," + y + "," + z + "]," +

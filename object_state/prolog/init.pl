@@ -17,6 +17,7 @@
 :- use_module(library('knowrob/beliefstate')).
 :- use_module(library('knowrob/transforms')).
 :- use_module(library('knowrob/owl')).
+:- use_module(library('knowrob/rdfs')).
 %:- use_module(library('knowrob/owl_export')).
 
 :- use_module(library('object_state')).

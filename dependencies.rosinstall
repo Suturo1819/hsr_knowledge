@@ -1,24 +1,25 @@
-- git:
-    local-name: iai_common_msgs
-    uri: https://github.com/code-iai/iai_common_msgs.git
-    version: 673045b2364e54b569438794b0240486e4afae2b
-- git:
-    local-name: knowrob
-    uri: https://github.com/knowrob/knowrob.git
-    version: 7fa6e074a6af312bc235d5ede5d092921af61095
-- git:
-    local-name: suturo_msgs
-    uri: https://github.com/Suturo1819/suturo_msgs.git
-    version: master
+# hsr_knowledge dependencies
 - git:
     local-name: giskard_msgs
     uri: https://github.com/SemRoCo/giskard_msgs.git
     version: 3cea851f1823e5fa58164700e06a8e34cd78a639
 - git:
+    local-name: iai_common_msgs
+    uri: https://github.com/code-iai/iai_common_msgs.git
+    version: 673045b2364e54b569438794b0240486e4afae2b
+- git:
     local-name: iai_maps
     uri: https://github.com/Suturo1819/iai_maps.git
     version: master
 - git:
+    local-name: knowrob
+    uri: https://github.com/daniel86/knowrob.git
+    version: 7fa6e074a6af312bc235d5ede5d092921af61095
+- git:
     local-name: pr2_kinematics
     uri: https://github.com/code-iai/pr2_kinematics.git
     version: kinetic-devel
+- git:
+    local-name: suturo_msgs
+    uri: https://github.com/Suturo1819/suturo_msgs.git
+    version: master

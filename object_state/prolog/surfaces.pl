@@ -6,6 +6,7 @@
       assert_object_on/2,
       all_srdl_objects/1,
       shelf_floors/1,
+      table_surface/1,
       all_objects_in_whole_shelf/1,
       surface_size/2,
       test_surfaces/0
@@ -22,6 +23,7 @@
     assert_object_on(r,r),
 	all_srdl_objects(?),
     shelf_floors(?),
+    table_surface(?),
     all_objects_in_whole_shelf(?),
     surface_size(r,?),
     test_surfaces.
@@ -63,6 +65,11 @@ shelf_floors(ShelfFloors) :-
         rdf_has_prolog(ShelfFloor, srdl2_comp:'urdfName', UrdfName),
         atom_concat('shelf_floor',_,UrdfName)
         ), ShelfFloors).
+
+table_surface(Table) :-
+    all_srdl_objects(Surfaces),
+    member(Table, Surfaces),
+    rdf_equal(Table, robocup:'kitchen_description_table_center').
 
 all_objects_in_whole_shelf(Instance) :-
     findall(Instance, (

@@ -71,3 +71,6 @@ A more adventurous predicate can be useful to find objects at different location
 ## Protege for Ontology
 
 Use the ROS-Protege version from Daniel, to load ontologies, that reference ros-packages. https://github.com/Suturo1819/ros-protege.git
+
+## action client
+`rosrun object_state perception_action_client.py hsr_perception_<table,shelf>`

@@ -47,6 +47,6 @@ if __name__ == '__main__':
             rospy.logerr("No action server specified.")
             rospy.logerr("Use either 'hsr_perception_shelf' or 'hsr_perception_table' as argument.")
         print("Result: ", ", ".join([str(n.obj_class) for n in result.detectionData]))
-        #print("Result: %s" % str(result.detectionData))
+        print("Result: %s" % str(result.detectionData))
     except rospy.ROSInterruptException:
         print("program interrupted before completion")

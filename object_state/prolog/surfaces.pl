@@ -6,9 +6,9 @@
       assert_object_on/2,
       all_srdl_objects/1,
       shelf_floors/1,
+      shelf_floor_at_height/2,
       table_surface/1,
       all_objects_in_whole_shelf/1,
-      surface_size/2,
       test_surfaces/0
     ]).
 
@@ -23,9 +23,9 @@
     assert_object_on(r,r),
 	all_srdl_objects(?),
     shelf_floors(?),
+    shelf_floor_at_height(r,?),
     table_surface(?),
     all_objects_in_whole_shelf(?),
-    surface_size(r,?),
     test_surfaces.
 
 object_current_surface(Instance, Surface) :-
@@ -33,18 +33,29 @@ object_current_surface(Instance, Surface) :-
 
 %% If there's another object in the shelf with the same class, give same shelf
 object_goal_surface(Instance, Surface) :-
-    rdfs_instance_of(Instance, Class),
     all_objects_in_whole_shelf(ObjectsInShelf),
     member(ObjectInShelf, ObjectsInShelf),
-    rdfs_instance_of(ObjectInShelf, Class),
-    object_current_surface(ObjectInShelf, Surface).
+    findall(SingleClass, (
+        rdfs_instance_of(ObjectInShelf, SingleClass)
+        ), [Class|_]),
+    rdfs_instance_of(Instance, Class),
+    object_current_surface(ObjectInShelf, Surface), !.
 
-object_goal_surface(_, _) :-
-    false.
+%% If there is no corresponding class, take some shelf in the middle
+object_goal_surface(_, Surface) :-
+    (shelf_floor_at_height(0.9, Surface);
+    shelf_floor_at_height(0.6, Surface)),
+    objects_on_surface([], Surface), !.
+
+%% If middle shelves also occupied, take rest (lowest level first). WARNING: HSR may not be able to reach upper levels
+object_goal_surface(_, Surface) :-
+    shelf_floors(ShelfFloors),
+    member(ShelfFloor,ShelfFloors),
+    objects_on_surface([], ShelfFloor).
 
 objects_on_surface(Instances, Surface) :-
-    findall(Instances,
-        object_current_surface(Instances, Surface),
+    findall(Instance,
+        object_current_surface(Instance, Surface),
         Instances).
 
 assert_object_on(Instance, Surface) :-
@@ -66,10 +77,20 @@ shelf_floors(ShelfFloors) :-
         atom_concat('shelf_floor',_,UrdfName)
         ), ShelfFloors).
 
+shelf_floor_at_height(Height, TargetShelf) :-
+    findall(ShelfFloor, (
+        shelf_floors(AllFloors),
+        member(ShelfFloor, AllFloors),
+        srdl_matrix(ShelfFloor, M),
+        matrix(M, [_, _, Z], _),
+        Z < Height
+    ), ShelfFloors),
+    reverse(ShelfFloors, [TargetShelf|_]).
+
 table_surface(Table) :-
     all_srdl_objects(Surfaces),
     member(Table, Surfaces),
-    rdf_equal(Table, robocup:'kitchen_description_table_center').
+    rdf_equal(Table, robocup:'kitchen_description_table_surface_center').
 
 all_objects_in_whole_shelf(Instance) :-
     findall(Instance, (
@@ -79,25 +100,20 @@ all_objects_in_whole_shelf(Instance) :-
         member(Instance, ObjPerShelf)
         ), Instance).
 
-surface_size(TFFrame, Size) :-
-    rdf_has(Instance, srdl2_comp:'urdfName', literal(TFFrame)),
-    rdf_has(Instance, srdl2_comp:'box_size', Size), !.
-
-surface_size(Instance, Size) :-
-    rdf_has(Instance, srdl2_comp:'box_size', Size).
-
 test_surfaces :-
     owl_instance_from_class(hsr_objects:'Other', Instance),
-    Shelf = 'http://knowrob.org/kb/robocup.owl#kitchen_description_shelf_floor_1_piece',
-    %rdf_equal(Shelf, robocup:'kitchen_description_shelf_floor_1_piece')
+    rdf_equal(Shelf, robocup:'kitchen_description_shelf_floor_1_piece'),
     assert_object_on(Instance, Shelf),
     rdfs_individual_of(Shelf, srdl2_comp:'UrdfLink'),
     objects_on_surface(Objects, Shelf),
     rdf_has(Instance, hsr_objects:'supportedBy', _),
     all_objects_in_whole_shelf(AllObjects),
-    %shelf_floors(AllFloors),
+    shelf_floors(AllFloors),
+    member(Shelf, AllFloors),
     member(Instance,Objects),
     member(Instance,AllObjects),
     owl_instance_from_class(hsr_objects:'Other', OtherInstance),
-    object_goal_surface(OtherInstance, OtherSurface).
+    object_goal_surface(OtherInstance, OtherSurface),
+    rdf_equal(Shelf, OtherSurface),
+    srdl_matrix(Shelf, Matrix).
 

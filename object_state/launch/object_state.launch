@@ -22,7 +22,7 @@
 
   <node name="perception_subscriber" pkg="object_state" type="object_detection_subscriber.py" output="screen"/>
 
-  <node name="object_shelf_location_service" pkg="object_state" type="object_in_shelf_location_service.py" output="screen"/>
+  <!--<node name="object_shelf_location_service" pkg="object_state" type="object_in_shelf_location_service.py" output="screen"/>-->
 
   
   <group if="$(arg mongodb_log)">

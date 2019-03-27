@@ -11,6 +11,7 @@ class PerceptionSubscriber(rospy.Subscriber):
     def __init__(self, sem_location, topic, message_type):
         self.sem_location = sem_location
         super(PerceptionSubscriber, self).__init__(topic, message_type, self.callback)
+        self.surface_query = ''
 
     def callback(self, perceived_object_list):
         for data in perceived_object_list.result.detectionData:
@@ -36,11 +37,10 @@ class PerceptionSubscriber(rospy.Subscriber):
             qw = str(data.pose.pose.orientation.w)
             threshold = "0.05"
 
-            self.surface_query = ''
             if self.sem_location == 'table':
                 self.surface_query = 'table_surface(Surface),'
             elif self.sem_location == 'shelf':
-                self.surface_query = "rdf_equal(Surface, robocup:'kitchen_description_shelf_floor_2_piece')," ### <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                self.surface_query = "shelf_floor_at_height(" + z + ", Surface),"### <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
             query_string = ("create_object_at(hsr_objects:'" +
                             obj_class + "'," +

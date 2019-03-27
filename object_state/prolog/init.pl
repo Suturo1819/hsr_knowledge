@@ -18,11 +18,13 @@
 :- use_module(library('knowrob/transforms')).
 :- use_module(library('knowrob/owl')).
 :- use_module(library('knowrob/rdfs')).
+%:- use_module(library('knowrob/comp_spatial')).
 %:- use_module(library('knowrob/owl_export')).
 
 :- use_module(library('object_state')).
 :- use_module(library('surfaces')).
 :- use_module(library('beliefstate')).
+:- use_module(library('spatial_comp')).
 %:- use_module(library('static_preset')).
 
 :- owl_parse('package://knowrob_common/owl/knowrob.owl').

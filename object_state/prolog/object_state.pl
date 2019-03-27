@@ -75,16 +75,6 @@ create_object(ObjectType, Instance) :-
 create_object_at(ObjectType, Transform, Threshold, Instance) :-
 	new_perceived_at(ObjectType, Transform, Threshold, Instance).
 
-
-%% Object = the object type
-%% Instance = the returned other closest objects type
-/*semantically_closest_object(ObjectType, OtherType) :-
-	owl_class_of(ObjectType, SuperType),
-	not (SuperType = knowrob:'Thing'),
-	owl_class_of(OtherType, SuperType).*/
-	
-
-
 spawn_on_table :-
 	new_perceived_at(hsr_objects:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _).
 

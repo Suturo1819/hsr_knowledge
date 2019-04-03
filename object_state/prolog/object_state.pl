@@ -60,7 +60,14 @@ object_of_type(ObjectType, Instance) :-
 %% Interface predicates %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+%in knowrob_objects
+%comp_tf_pose(Obj, Pose, [Instant,_]) :-
+%  rdf_has(Obj, knowrob:frameName, ObjFrame),
+%  current_time(Now),
+%  ( var(Instant) -> Instant = Now ; 1 > abs(Now - Instant) ),
+%  map_frame_name(MapFrameName),
+%  tf_lookup_transform(MapFrameName, ObjFrame, PoseTerm),
+%owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose), !.
 
 %belief_new_object(hsr_objects:'Device', Inst),
 %X = 0.7, atom_number(X_atom,X),

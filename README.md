@@ -6,6 +6,28 @@ Use wstool in a seperate workspace to install the dependencies from *dependencie
 
 Run the Prolog interpreter with `rosrun rosprolog rosprolog object_state`.
 
+## Run
+
+To run the beliefstate, run
+
+```
+roslaunch object_state object_state.launch
+```
+
+For the URDF of the environment, choose the following:
+
+```
+roslaunch iai_hsr_robocup hsr_robocup_with_state_publisher.launch
+```
+
+or if you want to run the URDF and map together, do
+
+```
+roslaunch iai_hsr_robocup hsr_maps.launch
+```
+
+which launches the map and snap_map from the hsr_navigation, and the URDF state publisher of the environment.
+
 ## Setup
 
 Create one catkin workspace for the dependencies and load the wstool file into the src directory

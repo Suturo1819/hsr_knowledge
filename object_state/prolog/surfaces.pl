@@ -50,8 +50,8 @@ object_goal_surface(_, Surface) :-
 %% If middle shelves also occupied, take rest (lowest level first). WARNING: HSR may not be able to reach upper levels
 object_goal_surface(_, Surface) :-
     shelf_floors(ShelfFloors),
-    member(ShelfFloor,ShelfFloors),
-    objects_on_surface([], ShelfFloor).
+    member(Surface,ShelfFloors),
+    objects_on_surface([], Surface).
 
 objects_on_surface(Instances, Surface) :-
     findall(Instance,
@@ -115,5 +115,5 @@ test_surfaces :-
     owl_instance_from_class(hsr_objects:'Other', OtherInstance),
     object_goal_surface(OtherInstance, OtherSurface),
     rdf_equal(Shelf, OtherSurface),
-    srdl_matrix(Shelf, Matrix).
+    srdl_matrix(Shelf, TestMatrix).
 

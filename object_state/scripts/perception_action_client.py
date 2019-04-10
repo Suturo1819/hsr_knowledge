@@ -6,22 +6,23 @@ import suturo_perception_msgs.msg
 import actionlib
 
 
-def perceive_client(server_name):
+def perceive_client(regions):
     # Initialise action client
-    action = None
-    goal = None
-    if server_name == 'hsr_perception_table':
-        action = suturo_perception_msgs.msg.PerceiveTableAction
-        goal = suturo_perception_msgs.msg.PerceiveTableGoal(visualisation=False)
-    elif server_name == 'hsr_perception_shelf':
-        action = suturo_perception_msgs.msg.PerceiveShelfAction
-        goal = suturo_perception_msgs.msg.PerceiveShelfGoal(visualisation=False)
-    else:
-        rospy.logerr("Server name %s can not be resolved to action." % server_name)
+    action = suturo_perception_msgs.msg.ExtractObjectInfoAction
+    regions = [str(region) for region in regions]
+    goal = suturo_perception_msgs.msg.ExtractObjectInfoActionGoal(visualisation=True, regions=regions)
+    # if server_name == 'hsr_perception_table':
+    #     action = suturo_perception_msgs.msg.PerceiveTableAction
+    #     goal = suturo_perception_msgs.msg.PerceiveTableGoal(visualisation=False)
+    # elif server_name == 'hsr_perception_shelf':
+    #     action = suturo_perception_msgs.msg.PerceiveShelfAction
+    #     goal = suturo_perception_msgs.msg.PerceiveShelfGoal(visualisation=False)
+    # else:
+    #     rospy.logerr("Server name %s can not be resolved to action." % server_name)
 
-    client = actionlib.SimpleActionClient(str(server_name), action)
+    client = actionlib.SimpleActionClient("suturo_pipeline", action)
 
-    rospy.loginfo("Waiting for server %s..." % server_name)
+    rospy.loginfo("Waiting for server %s..." % "suturo_pipeline")
     client.wait_for_server()
     rospy.loginfo("Server is up!")
 
@@ -41,11 +42,11 @@ if __name__ == '__main__':
     try:
         rospy.init_node('perceive_py')
         if len(sys.argv) > 1:
-            rospy.loginfo("Start server call to action %s" % sys.argv[1])
-            result = perceive_client(sys.argv[1])
+            rospy.loginfo("Start perception call to regions %s" % str(sys.argv[1:]))
+            result = perceive_client(sys.argv[1:])
         else:
-            rospy.logerr("No action server specified.")
-            rospy.logerr("Use either 'hsr_perception_shelf' or 'hsr_perception_table' as argument.")
+            rospy.logerr("No regions specified.")
+            rospy.logerr("Use 'robocup_table' oder 'robocup_shelf_0', 'robocup_shelf_1', etc.")
         print("Result: ", ", ".join([str(n.obj_class) for n in result.detectionData]))
         print("Result: %s" % str(result.detectionData))
     except rospy.ROSInterruptException:

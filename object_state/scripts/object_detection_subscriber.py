@@ -61,7 +61,7 @@ def callback(perceived_object_list):
 
 def listener():
     rospy.init_node('perception_listener', anonymous=False)
-    rospy.Subscriber("suturo_pipeline/result", message.ExtractObjectInfoActionResult, callback)
+    rospy.Subscriber("extract_object_infos/result", message.ExtractObjectInfoActionResult, callback)
     # PerceptionSubscriber('table', "hsr_perception_table/result", message.PerceiveTableActionResult)
     # PerceptionSubscriber('shelf', "hsr_perception_shelf/result", message.PerceiveShelfActionResult)
     rospy.spin()

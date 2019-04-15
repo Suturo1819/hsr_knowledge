@@ -1,7 +1,10 @@
 :- module(beliefstate,
     [
+      gripper/1,
       new_perceived_at/4,
       hsr_existing_object_at/4,
+      attach_object_to_gripper/1,
+      release_object_from_gripper/0,
       belief_object_at_location/3,
       belief_class_of/2
     ]).
@@ -11,10 +14,21 @@
 :- rdf_db:rdf_register_ns(srdl2_comp, 'http://knowrob.org/kb/srdl2-comp.owl#', [keep(true)]).
 
 :- rdf_meta
+    gripper(+),
     new_perceived_at(r,+,+,r),
     hsr_existing_object_at(r,+,+,r),
+    attach_object_to_gripper(r),
+    release_object_from_gripper,
     belief_object_at_location(r,+,+),
     belief_class_of(r,r).
+
+gripper(Gripper) :-
+    belief_existing_objects([Gripper|_]), ! .
+
+gripper(Gripper) :-
+    rdf_instance_from_class(knowrob:'EnduringThing-Localized', belief_state, Gripper),
+    rdf_assert(Gripper, rdf:type, owl:'NamedIndividual', belief_state),
+    rdf_assert(Gripper, knowrob:'frameName', hand_palm_link, belief_state).
 
 new_perceived_at(ObjType, Transform, Threshold, Instance) :-
     hsr_existing_object_at(ObjType, Transform, Threshold, Instance),
@@ -28,6 +42,28 @@ hsr_existing_object_at(_, Transform, Threshold, Instance) :-
     rdf(Instance, rdf:type, owl:'NamedIndividual', belief_state),
     rdfs_individual_of(Instance, hsr_objects:'Robocupthings'),
     belief_object_at_location(Instance, Transform, Threshold), !.
+
+attach_object_to_gripper(Instance) :-
+    rdf_retractall(Instance, hsr_objects:'supportedBy', _),
+    gripper(Gripper),
+    rdf_assert(Instance, hsr_objects:'supportedBy', Gripper),
+    object_frame_name(Instance, InstanceFrame),
+    object_frame_name(Gripper, GripperFrame),
+    tf_lookup_transform(GripperFrame, InstanceFrame, PoseTerm),
+    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
+    transform_data(Pose,(Translation, Rotation)),
+    belief_at_update(Instance, [GripperFrame, _, Translation, Rotation]).
+
+release_object_from_gripper :-
+    gripper(Gripper),
+    objects_on_surface(Instances, Gripper),
+    member(Instance, Instances),
+    object_frame_name(Instance, InstanceFrame),
+    tf_lookup_transform(map, InstanceFrame, PoseTerm),
+    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
+    transform_data(Pose,(Translation, Rotation)),
+    belief_at_update(Instance, [map, _, Translation, Rotation]).
+
 
 %% Add these predicates because they are not exported in the corresponding modules
 belief_object_at_location(ObjectId, NewPose, Dmax) :-

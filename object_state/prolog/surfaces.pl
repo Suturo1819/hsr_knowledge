@@ -9,6 +9,7 @@
       shelf_floor_at_height/2,
       table_surface/1,
       all_objects_in_whole_shelf/1,
+      surface_pose_in_map/2,
       test_surfaces/0
     ]).
 
@@ -26,6 +27,7 @@
     shelf_floor_at_height(r,?),
     table_surface(?),
     all_objects_in_whole_shelf(?),
+    surface_pose_in_map(r,?),
     test_surfaces.
 
 object_current_surface(Instance, Surface) :-
@@ -99,6 +101,13 @@ all_objects_in_whole_shelf(Instance) :-
         objects_on_surface(ObjPerShelf, Shelf),
         member(Instance, ObjPerShelf)
         ), Instance).
+
+surface_pose_in_map(Surface, [Translation, Rotation]) :-
+    rdf_has(Surface, srdl2_comp:'urdfName', literal(UrdfName)),
+    string_concat('environment/', UrdfName, Frame),
+    tf_lookup_transform(map, Frame, PoseTerm),
+    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
+    transform_data(Pose,(Translation, Rotation)).
 
 test_surfaces :-
     owl_instance_from_class(hsr_objects:'Other', Instance),

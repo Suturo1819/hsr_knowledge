@@ -10,7 +10,10 @@ def perceive_client(regions):
     # Initialise action client
     action = suturo_perception_msgs.msg.ExtractObjectInfoAction
     regions = [str(region) for region in regions]
-    goal = suturo_perception_msgs.msg.ExtractObjectInfoActionGoal(visualisation=True, regions=regions)
+
+    goal = suturo_perception_msgs.msg.ExtractObjectInfoGoal()
+    goal.visualize = True
+    goal.regions = regions
     # if server_name == 'hsr_perception_table':
     #     action = suturo_perception_msgs.msg.PerceiveTableAction
     #     goal = suturo_perception_msgs.msg.PerceiveTableGoal(visualisation=False)
@@ -20,9 +23,9 @@ def perceive_client(regions):
     # else:
     #     rospy.logerr("Server name %s can not be resolved to action." % server_name)
 
-    client = actionlib.SimpleActionClient("suturo_pipeline", action)
+    client = actionlib.SimpleActionClient("extract_object_infos", action)
 
-    rospy.loginfo("Waiting for server %s..." % "suturo_pipeline")
+    rospy.loginfo("Waiting for server %s..." % "extract_object_infos")
     client.wait_for_server()
     rospy.loginfo("Server is up!")
 

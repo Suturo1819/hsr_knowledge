@@ -2,7 +2,8 @@
     [
       surface_size/2,
       srdl_matrix/2,
-      matrix_multiply/3
+      matrix_multiply/3,
+      hsr_lookup_transform/4
     ]).
 
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
@@ -12,7 +13,8 @@
 :- rdf_meta
     surface_size(r,?),
     srdl_matrix(r,?),
-    matrix_multiply(r,r,?).
+    matrix_multiply(r,r,?),
+    hsr_lookup_transform(r,r,?,?).
 
 surface_size(TFFrame, Size) :-
     rdf_has(Instance, srdl2_comp:'urdfName', literal(TFFrame)),
@@ -57,6 +59,11 @@ matrix_multiply(Matrix, Transform, OutMatrix) :-
     quaternion_multiply(Rot, TRot, TranslatedRot),
     matrix(TranslatedMat, TranslatedTrans, _),
     matrix(OutMatrix, TranslatedTrans, TranslatedRot).
+
+hsr_lookup_transform(SourceFrame, TargetFrame, Translation, Rotation) :-
+    tf_lookup_transform(SourceFrame, TargetFrame, PoseTerm),
+    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
+    transform_data(Pose,(Translation, Rotation)).
 
 %recursive_relative_matrix(Loc, Matrix) :-
 %    (rdf_has(Loc, knowrob:'relativeTo' , RelLoc),

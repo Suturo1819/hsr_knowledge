@@ -9,7 +9,7 @@
       object_at_table/1,
       object_of_type/2,
       %semantically_closest_object/2,
-      create_object_at/4,
+      create_object_at/6,
       hsr_existing_objects/1
     ]).
 
@@ -35,7 +35,7 @@
 	object_of_type(r,?),
 	test_belief,
 	spawn_on_table,
-	create_object_at(r,r,r,?),
+	create_object_at(r,r,r,?,-,-),
 	hsr_existing_objects(?).
 
 
@@ -70,8 +70,21 @@ create_object(ObjectType, Instance) :-
 	belief_new_object(ObjectType, Instance).
 
 
-create_object_at(ObjectType, Transform, Threshold, Instance) :-
-	new_perceived_at(ObjectType, Transform, Threshold, Instance).
+create_object_at(ObjectType, Transform, Threshold, Instance, [Depth, Width, Height], [R,G,B,A]) :-
+    new_perceived_at(ObjectType, Transform, Threshold, Instance),
+    object_assert_dimensions(Instance, Depth, Width, Height),
+    set_object_colour(Instance, [R,G,B,A]),
+    hsr_existing_objects(Objects),
+    belief_republish_objects(Objects).
+
+set_object_colour(Instance, [0.0, 0.0, 0.0, 0.0]) :-
+    object_assert_color(Instance, [0.8, 0.8, 0.8, 0.8]), !.
+
+set_object_colour(Instance, [R,G,B,_]) :-
+    RConv is R/255,
+    GConv is G/255,
+    BConv is B/255,
+    object_assert_color(Instance, [RConv,GConv,BConv,0.8]).
 
 spawn_on_table :-
 	new_perceived_at(hsr_objects:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _).

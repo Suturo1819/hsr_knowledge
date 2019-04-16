@@ -3,6 +3,7 @@
 import rospy
 from json_prolog import json_prolog
 import suturo_perception_msgs.msg as message
+from std_msgs.msg import ColorRGBA
 
 prolog = json_prolog.Prolog()
 
@@ -21,6 +22,13 @@ def callback(perceived_object_list):
         confidence = '1.0' if data.confidence == 0.0 else data.confidence
         shape = str(data.shape)
         source_frame = 'map'
+        depth = str(data.depth)
+        width = str(data.width)
+        height = str(data.height)
+        r = str(data.color.r)
+        g = str(data.color.g)
+        b = str(data.color.b)
+        a = str(data.color.a)
 
         x = str(data.pose.pose.position.x)
         y = str(data.pose.pose.position.y)
@@ -49,9 +57,11 @@ def callback(perceived_object_list):
         query_string = ("create_object_at(hsr_objects:'" +
                         obj_class + "'," +
                         "['" + source_frame +
-                        "', _, [" + x + "," + y + "," + z + "]," +
-                        "[" + qx + "," + qy + "," + qz + "," + qw + "]]," +
-                        threshold + ", ObjectInstance)," +
+                        "', _, [" + ", ".join([x,y,z]) + "]," +
+                        "[" + ", ".join([qx,qy,qz,qw]) + "]]," +
+                        threshold + ", ObjectInstance," +
+                        "[" + ", ".join([depth,width,height]) + "], " +
+                        "[" + ", ".join([r,g,b,a]) + "])," +
                         surface_query +
                         "assert_object_on(ObjectInstance, Surface).")
         rospy.loginfo('Send query: \n' + query_string)

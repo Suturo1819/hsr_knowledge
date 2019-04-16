@@ -61,8 +61,22 @@ release_object_from_gripper :-
     object_frame_name(Instance, InstanceFrame),
     tf_lookup_transform(map, InstanceFrame, PoseTerm),
     owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
-    transform_data(Pose,(Translation, Rotation)),
-    belief_at_update(Instance, [map, _, Translation, Rotation]).
+    transform_data(Pose,([X,Y,Z], Rotation)),
+    belief_at_update(Instance, [map, _, [X,Y,Z], Rotation]),
+    rdf_retractall(Instance, hsr_objects:'supportedBy', _),
+    select_surface([X,Y,Z], Surface),
+    rdf_assert(Instance, hsr_objects:'supportedBy', Surface).
+
+select_surface([X,Y,Z], Surface) :-
+    table_surface(Table),
+    object_frame_name(Table, UrdfName),
+    string_concat('environment/', UrdfName, TableFrame),
+    hsr_lookup_transform(map, TableFrame, [TX,TY,_], _),
+    hsr_lookup_transform(map, environment/shelf_base_center, [SX,SY,_], _),
+    DTable is sqrt((TX-X)*(TX-X) + (TY-Y)*(TY-Y)),
+    DShelf is sqrt((SX-X)*(SX-X) + (SY-Y)*(SY-Y)),
+    ((DShelf < DTable, shelf_floor_at_height(Z, Surface));
+    rdf_equal(Surface, Table)).
 
 
 %% Add these predicates because they are not exported in the corresponding modules

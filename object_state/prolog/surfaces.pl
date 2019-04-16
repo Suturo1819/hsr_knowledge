@@ -109,6 +109,12 @@ surface_pose_in_map(Surface, [Translation, Rotation]) :-
     owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
     transform_data(Pose,(Translation, Rotation)).
 
+%surface_under_frame(Frame, Surface) :-
+%    table_surface(Table),
+%    object_frame_name(Table, TableFrame),
+%    rdf_equal(Shelf, robocup:'kitchen_description_shelf_base_center'),
+%
+
 test_surfaces :-
     owl_instance_from_class(hsr_objects:'Other', Instance),
     rdf_equal(Shelf, robocup:'kitchen_description_shelf_floor_1_piece'),

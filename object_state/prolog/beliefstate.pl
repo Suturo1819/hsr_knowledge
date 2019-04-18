@@ -5,6 +5,7 @@
       hsr_existing_object_at/4,
       attach_object_to_gripper/1,
       release_object_from_gripper/0,
+      select_surface/2,
       belief_object_at_location/3,
       belief_class_of/2
     ]).
@@ -19,6 +20,7 @@
     hsr_existing_object_at(r,+,+,r),
     attach_object_to_gripper(r),
     release_object_from_gripper,
+    select_surface(r,?),
     belief_object_at_location(r,+,+),
     belief_class_of(r,r).
 

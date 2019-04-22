@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='US-ASCII'?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY action_effects 'http://knowrob.org/kb/action-effects.owl#'>
+    <!ENTITY computable 'http://knowrob.org/kb/computable.owl#'>
+    <!ENTITY dc 'http://purl.org/dc/elements/1.1/'>
+    <!ENTITY hsr_objects 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#'>
+    <!ENTITY knowrob 'http://knowrob.org/kb/knowrob.owl#'>
+    <!ENTITY ns1 'http://data.nasa.gov/qudt/owl/qudt#'>
+    <!ENTITY ns2 'http://www.linkedmodel.org/schema/vaem#'>
+    <!ENTITY ns3 'http://voag.linkedmodel.org/schema/voag#'>
+    <!ENTITY ns4 'http://knowrob.org/kb/queries.owl#'>
+    <!ENTITY ns5 'http://qudt.org/schema/qudt#'>
+    <!ENTITY ns6 'http://knowrob.org/kb/knowrob_units.owl#'>
+    <!ENTITY object_change 'http://knowrob.org/kb/object-change.owl#'>
+    <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+    <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+    <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+    <!ENTITY robocup 'http://knowrob.org/kb/robocup.owl#'>
+    <!ENTITY skos 'http://www.w3.org/2004/02/skos/core#'>
+    <!ENTITY srdl2 'http://knowrob.org/kb/srdl2.owl#'>
+    <!ENTITY srdl2_comp 'http://knowrob.org/kb/srdl2-comp.owl#'>
+    <!ENTITY srdl2act 'http://knowrob.org/kb/srdl2-action.owl#'>
+    <!ENTITY srdl2cap 'http://knowrob.org/kb/srdl2-cap.owl#'>
+    <!ENTITY swrl 'http://www.w3.org/2003/11/swrl#'>
+    <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+]>
+
+<rdf:RDF
+    xmlns:action_effects="&action_effects;"
+    xmlns:computable="&computable;"
+    xmlns:dc="&dc;"
+    xmlns:hsr_objects="&hsr_objects;"
+    xmlns:knowrob="&knowrob;"
+    xmlns:ns1="&ns1;"
+    xmlns:ns2="&ns2;"
+    xmlns:ns3="&ns3;"
+    xmlns:ns4="&ns4;"
+    xmlns:ns5="&ns5;"
+    xmlns:ns6="&ns6;"
+    xmlns:object_change="&object_change;"
+    xmlns:owl="&owl;"
+    xmlns:rdf="&rdf;"
+    xmlns:rdfs="&rdfs;"
+    xmlns:robocup="&robocup;"
+    xmlns:skos="&skos;"
+    xmlns:srdl2="&srdl2;"
+    xmlns:srdl2_comp="&srdl2_comp;"
+    xmlns:srdl2act="&srdl2act;"
+    xmlns:srdl2cap="&srdl2cap;"
+    xmlns:swrl="&swrl;"
+    xmlns:xsd="&xsd;"
+>
+<knowrob:Pose rdf:about="&knowrob;Pose_ZUKSTQBV">
+  <knowrob:quaternion rdf:datatype="&xsd;string">0.0 0.0 -0.672512976202 0.74008533769</knowrob:quaternion>
+  <knowrob:translation rdf:datatype="&xsd;string">0.0960722416639 -0.637974977493 0.55319917202</knowrob:translation>
+</knowrob:Pose>
+
+<knowrob:TemporalPart rdf:about="&knowrob;TemporalPart_HZCOKJGN">
+  <knowrob:pose rdf:resource="&knowrob;Pose_ZUKSTQBV"/>
+  <knowrob:temporalExtend rdf:resource="&knowrob;TimeInterval_1555927594.3149006"/>
+  <knowrob:temporalProperty rdf:resource="&knowrob;pose"/>
+</knowrob:TemporalPart>
+
+<knowrob:TimeInterval rdf:about="&knowrob;TimeInterval_1555927594.3149006">
+  <knowrob:startTime rdf:resource="&knowrob;timepoint_1555927594.3149006"/>
+</knowrob:TimeInterval>
+
+<owl:ObjectProperty rdf:about="&knowrob;pose">
+  <rdfs:subPropertyOf rdf:resource="&knowrob;locatedAtPoint-Spatial"/>
+</owl:ObjectProperty>
+
+<knowrob:TimePoint rdf:about="&knowrob;timepoint_1555927594.3149006"/>
+
+<srdl2_comp:UrdfLink rdf:about="&robocup;kitchen_description_shelf_floor_1_piece"
+    srdl2_comp:urdfName="shelf_floor_1_piece">
+  <srdl2_comp:box_size rdf:datatype="&xsd;string">0.36 1.03 0.04</srdl2_comp:box_size>
+  <srdl2_comp:material_name rdf:datatype="&xsd;string">shelf_grey</srdl2_comp:material_name>
+  <rdf:type rdf:resource="&owl;NamedIndividual"/>
+</srdl2_comp:UrdfLink>
+
+<hsr_objects:Kelloggscornflakes rdf:about="&hsr_objects;Kelloggscornflakes_RNEWBJOK"
+    knowrob:frameName="Kelloggscornflakes_RNEWBJOK">
+  <knowrob:boundingBoxSize rdf:datatype="&xsd;string">0.115961223841 0.171950951219 0.187534064054</knowrob:boundingBoxSize>
+  <knowrob:mainColorOfObject rdf:datatype="&xsd;string">0.8 0.8 0.8 0.8</knowrob:mainColorOfObject>
+  <knowrob:pose rdf:resource="&knowrob;Pose_ZUKSTQBV"/>
+  <knowrob:temporalParts rdf:resource="&knowrob;TemporalPart_HZCOKJGN"/>
+  <hsr_objects:supportedBy rdf:resource="&robocup;kitchen_description_shelf_floor_1_piece"/>
+  <rdf:type rdf:resource="&owl;NamedIndividual"/>
+</hsr_objects:Kelloggscornflakes>
+
+</rdf:RDF>

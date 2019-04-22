@@ -19,8 +19,8 @@ def callback(perceived_object_list):
             rospy.loginfo("The given class name is empty. Setting to OTHER.")
             obj_class = "Other"
 
-        confidence = '1.0' if data.confidence == 0.0 else data.confidence
-        shape = str(data.shape)
+        # confidence = '1.0' if data.confidence == 0.0 else data.confidence
+        # shape = str(data.shape)
         source_frame = 'map'
         depth = str(data.depth)
         width = str(data.width)

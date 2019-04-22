@@ -3,7 +3,8 @@
       surface_size/2,
       srdl_matrix/2,
       matrix_multiply/3,
-      hsr_lookup_transform/4
+      hsr_lookup_transform/4,
+      hsr_existing_object_at/3
     ]).
 
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
@@ -14,7 +15,8 @@
     surface_size(r,?),
     srdl_matrix(r,?),
     matrix_multiply(r,r,?),
-    hsr_lookup_transform(r,r,?,?).
+    hsr_lookup_transform(r,r,?,?),
+    hsr_existing_object_at(r,r,?).
 
 surface_size(TFFrame, Size) :-
     rdf_has(Instance, srdl2_comp:'urdfName', literal(TFFrame)),
@@ -64,6 +66,14 @@ hsr_lookup_transform(SourceFrame, TargetFrame, Translation, Rotation) :-
     tf_lookup_transform(SourceFrame, TargetFrame, PoseTerm),
     owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
     transform_data(Pose,(Translation, Rotation)).
+
+hsr_existing_object_at(Pose, Threshold, Instance) :-
+    rdf(Instance, rdf:type, owl:'NamedIndividual', belief_state),
+    rdfs_individual_of(Instance, hsr_objects:'Robocupitems'),
+    belief_at_id(Instance, OldPose),
+    transform_close_to(Pose, OldPose, 0.1).
+
+
 
 %recursive_relative_matrix(Loc, Matrix) :-
 %    (rdf_has(Loc, knowrob:'relativeTo' , RelLoc),

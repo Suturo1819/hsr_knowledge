@@ -24,7 +24,7 @@
     object_goal_surface(r,?),
     objects_on_surface(?,r),
     assert_object_on(r,r),
-	all_srdl_objects(?),
+    all_srdl_objects(?),
     shelf_floors(?),
     shelf_floor_at_height(r,?),
     table_surface(?),
@@ -39,8 +39,9 @@ object_goal_pose(Instance, [Translation, Rotation]) :-
     object_goal_surface(Instance, Surface),
     surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
     member(XOffset, [0, -0.1, 0.1, -0.2, 0.2, -0.3, 0.3, -0.4, 0.4]),
-    not(hsr_existing_object_at([map,_,[X + XOffset, Y, Z + 0.1], Rot], 0.1, Inst)),
-    Translation is [X + XOffset, Y, Z].
+    NewX is X + XOffset,    
+    not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.1, _)),
+    Translation = [NewX, Y, Z].
 
 %% Same obj class
 object_goal_surface(Instance, Surface) :-

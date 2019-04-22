@@ -1,6 +1,7 @@
 :- module(surfaces,
     [
       object_current_surface/2,
+      object_goal_pose/2,
       object_goal_surface/2,
       objects_on_surface/2,
       assert_object_on/2,
@@ -19,6 +20,7 @@
 
 :- rdf_meta
     object_current_surface(?,?),
+    object_goal_pose(r,?),
     object_goal_surface(r,?),
     objects_on_surface(?,r),
     assert_object_on(r,r),
@@ -32,6 +34,13 @@
 
 object_current_surface(Instance, Surface) :-
     rdf_has(Instance, hsr_objects:'supportedBy', Surface).
+
+object_goal_pose(Instance, [Translation, Rotation]) :-
+    object_goal_surface(Instance, Surface),
+    surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
+    member(XOffset, [0, -0.1, 0.1, -0.2, 0.2, -0.3, 0.3, -0.4, 0.4]),
+    not(hsr_existing_object_at([map,_,[X + XOffset, Y, Z + 0.1], Rot], 0.1, Inst)),
+    Translation is [X + XOffset, Y, Z].
 
 %% Same obj class
 object_goal_surface(Instance, Surface) :-

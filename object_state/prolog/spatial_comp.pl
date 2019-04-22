@@ -71,7 +71,7 @@ hsr_existing_object_at(Pose, Threshold, Instance) :-
     rdf(Instance, rdf:type, owl:'NamedIndividual', belief_state),
     rdfs_individual_of(Instance, hsr_objects:'Robocupitems'),
     belief_at_id(Instance, OldPose),
-    transform_close_to(Pose, OldPose, 0.1).
+    transform_close_to(Pose, OldPose, Threshold).
 
 
 

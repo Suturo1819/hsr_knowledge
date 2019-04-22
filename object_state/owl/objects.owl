@@ -70,7 +70,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Albihimbeerjuice -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Albihimbeerjuice">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -79,7 +79,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Apple -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Apple">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
     </owl:Class>
     
 
@@ -105,7 +105,15 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Banana -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Banana">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bathroomequipment -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bathroomequipment">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Hygiene"/>
     </owl:Class>
     
 
@@ -121,7 +129,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bellpepper -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bellpepper">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetable"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetables"/>
     </owl:Class>
     
 
@@ -137,6 +145,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bluecampingcup -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bluecampingcup">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -153,6 +162,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bowl -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Bowl">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
     </owl:Class>
     
@@ -169,6 +179,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Breakfastcereal -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Breakfastcereal">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cerealbox"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodbox"/>
     </owl:Class>
     
@@ -210,6 +221,14 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Device"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Electricstuff"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Other"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cerealbox -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cerealbox">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodbox"/>
     </owl:Class>
     
 
@@ -265,7 +284,24 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dinnerplate -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dinnerplate">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodordrinkvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodordrink"/>
     </owl:Class>
     
 
@@ -273,6 +309,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingbottle -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingbottle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -281,6 +318,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingcan -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingcan">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -289,15 +327,8 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingmug -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingmug">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodordrink"/>
     </owl:Class>
     
 
@@ -360,6 +391,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodcup -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodcup">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodjar -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodjar">
@@ -393,9 +432,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit">
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
     </owl:Class>
     
@@ -454,7 +493,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Helacurryketchup -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Helacurryketchup">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Processedfood"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sauce"/>
     </owl:Class>
     
 
@@ -478,6 +517,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Jug -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Jug">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -486,7 +526,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Kelloggscornflakes -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Kelloggscornflakes">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Foodvessel"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Cerealbox"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Processedfood"/>
     </owl:Class>
     
@@ -505,7 +545,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lemon -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lemon">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
     </owl:Class>
     
 
@@ -522,7 +562,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lime -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Lime">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
     </owl:Class>
     
 
@@ -597,7 +637,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Orange -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Orange">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
     </owl:Class>
     
 
@@ -621,7 +661,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Peach -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Peach">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
     </owl:Class>
     
 
@@ -629,7 +669,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pear -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pear">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Fruits"/>
     </owl:Class>
     
 
@@ -637,6 +677,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pitcher -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Pitcher">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Dishes"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -687,8 +728,16 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Reinebuttermilch -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Reinebuttermilch">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
     </owl:Class>
     
 
@@ -714,6 +763,22 @@
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Rubbereraser">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Officestuff"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Other"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Salt -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Salt">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sauce -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sauce">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Processedfood"/>
     </owl:Class>
     
 
@@ -754,7 +819,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Soda -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Soda">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink"/>
     </owl:Class>
     
 
@@ -770,7 +835,7 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sojamilch -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sojamilch">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkvessel"/>
     </owl:Class>
     
@@ -809,6 +874,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Stationary -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Stationary">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Furniture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sweets -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Sweets">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Processedfood"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Table -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Table">
@@ -817,10 +898,18 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Tea -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Tea">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Tomato -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Tomato">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetable"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetables"/>
     </owl:Class>
     
 
@@ -849,9 +938,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetable -->
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetables -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetable">
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Vegetables">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Naturalfood"/>
     </owl:Class>
     
@@ -868,8 +957,8 @@
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Waterbottle -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Waterbottle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drink"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinkingbottle"/>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Drinks"/>
     </owl:Class>
 </rdf:RDF>
 

@@ -13,7 +13,7 @@ def callback(perceived_object_list):
         rospy.wait_for_service('/json_prolog/query')
 
         obj_class = str(data.obj_class)
-        if obj_class:
+        if obj_class and float(data.confidence) > 0.5:
             obj_class = obj_class.capitalize().replace('_', '')
         else:
             rospy.loginfo("The given class name is empty. Setting to OTHER.")

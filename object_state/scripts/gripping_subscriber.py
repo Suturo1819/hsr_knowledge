@@ -24,7 +24,7 @@ class GripperSubscriber(rospy.Subscriber):
         super(GripperSubscriber, self).__init__(topic, message_type, self.callback)
 
     def callback(self, data):
-        """Scan gripper opening joint every second."""
+        """Scan gripper joint every second."""
         if data.header.stamp.to_nsec() - self.timestamp.to_nsec() > sec_in_nanos:
             self.timestamp = data.header.stamp
             joint_index = data.name.index("hand_motor_joint")
@@ -46,7 +46,7 @@ class GripperSubscriber(rospy.Subscriber):
             if solutions:
                 self.talker_goal.data.sentence = "Putting down: " + object_in_gripper
                 self.talker.send_goal(self.talker_goal)
-                rospy.loginfo("Gripper releasing: " + object_in_gripper)
+                rospy.loginfo("Putting down: " + object_in_gripper)
                 # print("RELEASE " + ("successful." if len(solutions) > 0 else "failed."))
         else:
             rospy.loginfo("No object in gripper to release.")
@@ -89,9 +89,8 @@ def safe_lookup_transform(source_frame, target_frame, duration=rospy.Duration(3)
     try:
         return tf_buffer.lookup_transform(source_frame, target_frame, now, duration)
     except (tf2_ros.ConnectivityException, tf2_ros.LookupException, tf2_ros.ExtrapolationException):
-        rospy.logerr("No transform between "+source_frame+" and "+target_frame)
         print("source: " + source_frame + "\ntarget: " + target_frame)
-        return [None, None]
+        rospy.logerr("No transform between "+source_frame+" and "+target_frame)
 
 
 def listener():

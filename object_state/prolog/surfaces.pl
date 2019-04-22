@@ -130,5 +130,5 @@ test_surfaces :-
     owl_instance_from_class(hsr_objects:'Other', OtherInstance),
     object_goal_surface(OtherInstance, OtherSurface),
     rdf_equal(Shelf, OtherSurface),
-    srdl_matrix(Shelf, TestMatrix).
+    srdl_matrix(Shelf, _).
 

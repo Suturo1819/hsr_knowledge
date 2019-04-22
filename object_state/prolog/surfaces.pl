@@ -33,6 +33,33 @@
 object_current_surface(Instance, Surface) :-
     rdf_has(Instance, hsr_objects:'supportedBy', Surface).
 
+%% Same obj class
+object_goal_surface(Instance, Surface) :-
+    rdfs_instance_of(Instance, Class), !,
+    all_objects_in_whole_shelf(ShelfObjs),
+    member(ShelfObj, ShelfObjs),
+    rdfs_instance_of(ShelfObj, Class),
+    object_current_surface(ShelfObj, Surface), !.
+
+%% Same direct superclass
+object_goal_surface(Instance, Surface) :-
+    rdfs_instance_of(Instance, Class), !,
+    owl_direct_subclass_of(Class, Super),
+    all_objects_in_whole_shelf(ShelfObjs),
+    member(ShelfObj, ShelfObjs),
+    rdfs_instance_of(ShelfObj, Super),
+    object_current_surface(ShelfObj, Surface), !.
+
+%% Same superclass 2 levels up
+object_goal_surface(Instance, Surface) :-
+    rdfs_instance_of(Instance, Class), !,
+    owl_direct_subclass_of(Class, Super),
+    owl_direct_subclass_of(Super, Supersuper),
+    all_objects_in_whole_shelf(ShelfObjs),
+    member(ShelfObj, ShelfObjs),
+    rdfs_instance_of(ShelfObj, Supersuper),
+    object_current_surface(ShelfObj, Surface), !.
+
 %% If there's another object in the shelf with the same class, give same shelf
 object_goal_surface(Instance, Surface) :-
     all_objects_in_whole_shelf(ObjectsInShelf),

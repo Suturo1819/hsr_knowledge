@@ -35,7 +35,7 @@ object_current_surface(Instance, Surface) :-
 
 %% Same obj class
 object_goal_surface(Instance, Surface) :-
-    rdfs_instance_of(Instance, Class), !,
+    rdfs_type_of(Instance, Class),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Class),
@@ -43,7 +43,7 @@ object_goal_surface(Instance, Surface) :-
 
 %% Same direct superclass
 object_goal_surface(Instance, Surface) :-
-    rdfs_instance_of(Instance, Class), !,
+    rdfs_type_of(Instance, Class),
     owl_direct_subclass_of(Class, Super),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
@@ -52,7 +52,7 @@ object_goal_surface(Instance, Surface) :-
 
 %% Same superclass 2 levels up
 object_goal_surface(Instance, Surface) :-
-    rdfs_instance_of(Instance, Class), !,
+    rdfs_type_of(Instance, Class),
     owl_direct_subclass_of(Class, Super),
     owl_direct_subclass_of(Super, Supersuper),
     all_objects_in_whole_shelf(ShelfObjs),

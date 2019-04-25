@@ -7,7 +7,8 @@
       release_object_from_gripper/0,
       select_surface/2,
       belief_object_at_location/3,
-      belief_class_of/2
+      belief_class_of/2,
+      hsr_belief_at_update/2
     ]).
 
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
@@ -22,7 +23,8 @@
     release_object_from_gripper,
     select_surface(r,?),
     belief_object_at_location(r,+,+),
-    belief_class_of(r,r).
+    belief_class_of(r,r),
+    hsr_belief_at_update(r,r).
 
 gripper(Gripper) :-
     belief_existing_objects([Gripper|_]), ! .
@@ -38,7 +40,7 @@ new_perceived_at(ObjType, Transform, Threshold, Instance) :-
 
 new_perceived_at(ObjType, Transform, _, Instance) :-
     belief_new_object(ObjType, Instance),
-    belief_at_update(Instance, Transform).
+    hsr_belief_at_update(Instance, Transform).
 
 hsr_existing_object_at(_, Transform, Threshold, Instance) :-
     rdf(Instance, rdf:type, owl:'NamedIndividual', belief_state),
@@ -64,7 +66,7 @@ release_object_from_gripper :-
     tf_lookup_transform(map, InstanceFrame, PoseTerm),
     owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
     transform_data(Pose,([X,Y,Z], Rotation)),
-    belief_at_update(Instance, [map, _, [X,Y,Z], Rotation]),
+    hsr_belief_at_update(Instance, [map, _, [X,Y,Z], Rotation]),
     rdf_retractall(Instance, hsr_objects:'supportedBy', _),
     select_surface([X,Y,Z], Surface),
     rdf_assert(Instance, hsr_objects:'supportedBy', Surface).
@@ -79,6 +81,36 @@ select_surface([X,Y,Z], Surface) :-
     DShelf is sqrt((SX-X)*(SX-X) + (SY-Y)*(SY-Y)),
     ((DShelf < DTable, shelf_floor_at_height(Z, Surface));
     rdf_equal(Surface, Table)).
+
+
+% Object placed between two groups
+hsr_belief_at_update(Instance, Transform) :-
+    findall(NearbyGroup, (
+        hsr_existing_object_at(Transform, 0.2, NearbyObject),
+        not(rdf_equal(Instance, NearbyObject)),
+        rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup)
+        ), [GroupA, GroupB]),
+    owl_instance_from_class(hsr_objects:'Group', NewGroup),
+    (rdf_has(GroupMember, hsr_objects:'inGroup', GroupA);
+     rdf_has(GroupMember, hsr_objects:'inGroup', GroupB)),
+    rdf_retractall(GroupMember, hsr_objects:'inGroup', _),
+    rdf_assert(GroupMember, hsr_objects:'inGroup', NewGroup),
+    rdf_assert(Instance, hsr_objects:'inGroup', NewGroup),
+    belief_at_update(Instance, Transform), !.
+
+% Object placed nearby a group
+hsr_belief_at_update(Instance, Tranform) :-
+    hsr_existing_object_at(Transform, 0.2, NearbyObject),
+    not(rdf_equal(Instance, NearbyObject)),
+    rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup),
+    rdf_assert(Instance, hsr_objects:'inGroup', NearbyGroup),
+    belief_at_update(Instance, Transform), !.
+
+% No groups nearby
+hsr_belief_at_update(Instance, Transform) :-
+    owl_instance_from_class(hsr_objects:'Group', Group),
+    rdf_assert(Instance, hsr_objects:'inGroup', Group),
+    belief_at_update(Instance, Transform), !.
 
 
 %% Add these predicates because they are not exported in the corresponding modules

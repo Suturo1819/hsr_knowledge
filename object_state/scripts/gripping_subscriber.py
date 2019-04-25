@@ -29,7 +29,7 @@ class GripperSubscriber(rospy.Subscriber):
             self.timestamp = data.header.stamp
             joint_index = data.name.index("hand_motor_joint")
             gripper_open_width_data = data.position[joint_index]
-            if gripper_open_width_data > 0.8 and self.gripper_closed:
+            if gripper_open_width_data > 0.7 and self.gripper_closed:
                 self.release_object_from_gripper()
             elif gripper_open_width_data < 0.4 and not self.gripper_closed:
                 self.attach_object_to_gripper()

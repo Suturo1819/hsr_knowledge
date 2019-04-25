@@ -99,7 +99,7 @@ hsr_belief_at_update(Instance, Transform) :-
     belief_at_update(Instance, Transform), !.
 
 % Object placed nearby a group
-hsr_belief_at_update(Instance, Tranform) :-
+hsr_belief_at_update(Instance, Transform) :-
     hsr_existing_object_at(Transform, 0.2, NearbyObject),
     not(rdf_equal(Instance, NearbyObject)),
     rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup),

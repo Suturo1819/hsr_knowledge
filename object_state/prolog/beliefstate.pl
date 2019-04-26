@@ -80,14 +80,14 @@ select_surface([X,Y,Z], Surface) :-
     DTable is sqrt((TX-X)*(TX-X) + (TY-Y)*(TY-Y)),
     DShelf is sqrt((SX-X)*(SX-X) + (SY-Y)*(SY-Y)),
     ((DShelf < DTable, shelf_floor_at_height(Z, Surface));
-    rdf_equal(Surface, Table)).
+    rdf_equal(Surface, Table)), ! .
 
 
 % Object placed between two groups
 hsr_belief_at_update(Instance, Transform) :-
     findall(NearbyGroup, (
-        hsr_existing_object_at(Transform, 0.2, NearbyObject),
         not(rdf_equal(Instance, NearbyObject)),
+        hsr_existing_object_at(Transform, 0.2, NearbyObject),
         rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup)
         ), [GroupA, GroupB]),
     owl_instance_from_class(hsr_objects:'Group', NewGroup),
@@ -100,8 +100,8 @@ hsr_belief_at_update(Instance, Transform) :-
 
 % Object placed nearby a group
 hsr_belief_at_update(Instance, Transform) :-
-    hsr_existing_object_at(Transform, 0.2, NearbyObject),
     not(rdf_equal(Instance, NearbyObject)),
+    hsr_existing_object_at(Transform, 0.2, NearbyObject),
     rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup),
     rdf_assert(Instance, hsr_objects:'inGroup', NearbyGroup),
     belief_at_update(Instance, Transform), !.

@@ -70,12 +70,39 @@ create_object(ObjectType, Instance) :-
 	belief_new_object(ObjectType, Instance).
 
 
-create_object_at(ObjectType, Transform, Threshold, Instance, [Depth, Width, Height], [R,G,B,A]) :-
+create_object_at(ObjectType, Transform, Threshold, Instance, [Width, Depth, Height], [R,G,B,A]) :-
     new_perceived_at(ObjectType, Transform, Threshold, Instance),
-    object_assert_dimensions(Instance, Depth, Width, Height),
+    object_assert_dimensions(Instance, Width, Depth, Height),
+    set_dimension_semantics(Instance, Width, Depth, Height),
     set_object_colour(Instance, [R,G,B,A]),
     hsr_existing_objects(Objects),
     belief_republish_objects(Objects).
+
+set_dimension_semantics(Instance, _, _, Height) :-
+    Height > 0.16,
+    rdf_assert(Instance, hsr_objects:'size', 'tallish').
+
+set_dimension_semantics(Instance, Width, Depth, Height) :-
+    Height < Width * 0.9,
+    Height < Depth * 0.9,
+    rdf_assert(Instance, hsr_objects:'size', 'flatish').
+
+set_dimension_semantics(Instance, Width, Depth, Height) :-
+    ((Depth > Width * 2, Depth > Height * 2);
+     (Width > Depth * 2, Width > Height * 2)),
+    rdf_assert(Instance, hsr_objects:'size', 'longish').
+
+set_dimension_semantics(Instance, Width, Depth, Height) :-
+    Volume is Width * Depth * Height * 1000,
+    Volume < 1.0,
+    rdf_assert(Instance, hsr_objects:'size', 'smallish').
+
+set_dimension_semantics(Instance, Width, Depth, Height) :-
+    Volume is Width * Depth * Height * 1000,
+    Volume > 2.0,
+    rdf_assert(Instance, hsr_objects:'size', 'biggish').
+
+
 
 set_object_colour(Instance, [0.0, 0.0, 0.0, 0.0]) :-
     object_assert_color(Instance, [0.8, 0.8, 0.8, 0.8]), !.

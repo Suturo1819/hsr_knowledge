@@ -52,6 +52,24 @@ object_goal_pose(Instance, [Translation, Rotation]) :-
     not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
     Translation = [NewX, Y, Z].
 
+% Sort by size if object class is OTHER
+object_goal_surface(Instance, Surface) :-
+    rdfs_type_of(Instance, hsr_objects:'Other'),
+    all_objects_in_whole_shelf(ShelfObjs),
+    member(ShelfObj, ShelfObjs),
+    rdf_has(Instance, hsr_objects:'size', Size),
+    rdf_has(ShelfObj, hsr_objects:'size', Size),
+    object_current_surface(ShelfObj, Surface), !.
+
+% Sort by color, if object class is OTHER
+object_goal_surface(Instance, Surface) :-
+    rdfs_type_of(Instance, hsr_objects:'Other'),
+    all_objects_in_whole_shelf(ShelfObjs),
+    member(ShelfObj, ShelfObjs),
+    object_color(Instance, Color),
+    object_color(ShelfObj, Color)
+    object_current_surface(ShelfObj, Surface), !.
+
 %% Same obj class
 object_goal_surface(Instance, Surface) :-
     rdfs_type_of(Instance, Class),

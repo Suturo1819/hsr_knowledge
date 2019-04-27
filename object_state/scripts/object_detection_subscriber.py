@@ -48,11 +48,8 @@ def callback(perceived_object_list):
         else:
             rospy.loginfo("Issue with region: %s" % data.region)
 
-        #
-        # if self.sem_location == 'table':
-        #     self.surface_query = 'table_surface(Surface),'
-        # elif self.sem_location == 'shelf':
-        #     self.surface_query = "shelf_floor_at_height(" + z + ", Surface),"
+
+
 
         query_string = ("create_object_at(hsr_objects:'" +
                         obj_class + "'," +

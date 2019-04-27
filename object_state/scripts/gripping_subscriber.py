@@ -41,12 +41,22 @@ class GripperSubscriber(rospy.Subscriber):
         object_in_gripper_raw = prolog.all_solutions(held_object_query)
         if object_in_gripper_raw:
             object_in_gripper = str(object_in_gripper_raw[0]['Name']).split('_')[0]
+            print(str(object_in_gripper_raw[0]['Name']))
+            superclass_query = "object_frame_name(_Instance, {}), " \
+                               "rdfs_type_of(_Instance, _Class)," \
+                               "owl_direct_subclass_of(_Class, _Super)," \
+                               "rdf_split_url(_, SuperclassName, _Super)".format(str(object_in_gripper_raw[0]['Name']))
+            superclass_result_raw = prolog.all_solutions(superclass_query)
+            output_object = object_in_gripper
+            if superclass_result_raw:
+                superclass = str(superclass_result_raw[0]['SuperclassName']).replace('\'', '')
+                output_object = superclass
             release_object_query = "release_object_from_gripper."
             solutions = prolog.all_solutions(release_object_query)
             if solutions:
-                self.talker_goal.data.sentence = "Putting down: " + object_in_gripper
+                self.talker_goal.data.sentence = "Putting down: " + output_object
                 self.talker.send_goal(self.talker_goal)
-                rospy.loginfo("Putting down: " + object_in_gripper)
+                rospy.loginfo("Putting down: " + output_object)
                 # print("RELEASE " + ("successful." if len(solutions) > 0 else "failed."))
         else:
             rospy.loginfo("No object in gripper to release.")
@@ -71,15 +81,16 @@ class GripperSubscriber(rospy.Subscriber):
                         closest_object = (frame, dist)
                     print (closest_object)
                 if closest_object[0]:
-                    superclass_query = "object_frame_name(_Instance, {}), " \
+                    superclass_query = "object_frame_name(_Instance, '{}'), " \
                                        "rdfs_type_of(_Instance, _Class)," \
                                        "owl_direct_subclass_of(_Class, _Super)," \
                                        "rdf_split_url(_, SuperclassName, _Super)".format(closest_object[0])
                     superclass_result_raw = prolog.all_solutions(superclass_query)
                     if superclass_result_raw:
-                        superclass = str(superclass_result_raw['SuperclassName']).replace('\'', '')
+                        rospy.loginfo(str(superclass_result_raw))
+                        superclass = str(superclass_result_raw[0]['SuperclassName']).replace('\'', '')
                         rospy.loginfo("Grasping the " + superclass)
-                        self.talker_goal.data.sentence = "Grasping the " + closest_object[0].split('_')[0]
+                        self.talker_goal.data.sentence = "Grasping the " + superclass
                     else:
                         rospy.loginfo("Grasping the " + closest_object[0].split('_')[0])
                         self.talker_goal.data.sentence = "Grasping the " + closest_object[0].split('_')[0]

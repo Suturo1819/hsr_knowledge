@@ -71,8 +71,18 @@ class GripperSubscriber(rospy.Subscriber):
                         closest_object = (frame, dist)
                     print (closest_object)
                 if closest_object[0]:
-                    rospy.loginfo("Grasping the " + closest_object[0].split('_')[0])
-                    self.talker_goal.data.sentence = "Grasping the " + closest_object[0].split('_')[0]
+                    superclass_query = "object_frame_name(_Instance, {}), " \
+                                       "rdfs_type_of(_Instance, _Class)," \
+                                       "owl_direct_subclass_of(_Class, _Super)," \
+                                       "rdf_split_url(_, SuperclassName, _Super)".format(closest_object[0])
+                    superclass_result_raw = prolog.all_solutions(superclass_query)
+                    if superclass_result_raw:
+                        superclass = str(superclass_result_raw['SuperclassName']).replace('\'', '')
+                        rospy.loginfo("Grasping the " + superclass)
+                        self.talker_goal.data.sentence = "Grasping the " + closest_object[0].split('_')[0]
+                    else:
+                        rospy.loginfo("Grasping the " + closest_object[0].split('_')[0])
+                        self.talker_goal.data.sentence = "Grasping the " + closest_object[0].split('_')[0]
                     self.talker.send_goal(self.talker_goal)
                     attach_to_gripper_query = "object_frame_name(Object, '"+closest_object[0]+"'), attach_object_to_gripper(Object)."
                     solution = prolog.all_solutions(attach_to_gripper_query)

@@ -67,7 +67,7 @@ object_goal_surface(Instance, Surface) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     object_color(Instance, Color),
-    object_color(ShelfObj, Color)
+    object_color(ShelfObj, Color),
     object_current_surface(ShelfObj, Surface), !.
 
 %% Same obj class

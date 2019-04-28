@@ -113,28 +113,28 @@ set_object_colour(Instance, [R,G,B,_]) :-
     object_assert_color(Instance, [RConv,GConv,BConv,0.8]),
     set_colour_semantics(Instance, [RConv,GConv,BConv]).
 
-set_colour_semantics(Instance, [0, 0, 0]) :-
+set_colour_semantics(Instance, [0.0, 0.0, 0.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'dark').
 
-set_colour_semantics(Instance, [1, 0, 0]) :-
+set_colour_semantics(Instance, [1.0, 0.0, 0.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'red').
 
-set_colour_semantics(Instance, [0, 1, 0]) :-
+set_colour_semantics(Instance, [0.0, 1.0, 0.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'green').
 
-set_colour_semantics(Instance, [1, 1, 0]) :-
+set_colour_semantics(Instance, [1.0, 1.0, 0.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'yellow').
 
-set_colour_semantics(Instance, [0, 0, 1]) :-
+set_colour_semantics(Instance, [0.0, 0.0, 1.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'dark-blue').
 
-set_colour_semantics(Instance, [1, 0, 1]) :-
+set_colour_semantics(Instance, [1.0, 0.0, 1.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'violet').
 
-set_colour_semantics(Instance, [0, 1, 1]) :-
+set_colour_semantics(Instance, [0.0, 1.0, 1.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'light-blue').
 
-set_colour_semantics(Instance, [1, 1, 1]) :-
+set_colour_semantics(Instance, [1.0, 1.0, 1.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'bright').
 
 %spawn_on_table :-

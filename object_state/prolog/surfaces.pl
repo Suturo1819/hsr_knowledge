@@ -70,11 +70,14 @@ object_goal_surface(Instance, Surface, Context) :-
     rdf_has(ShelfObj, hsr_objects:'size', Size),
     object_current_surface(ShelfObj, Surface),
     surface_pose_in_map(Surface, [[_,_,Z],_]),
-    _SurfaceZInCentimeters is Z * 100,
+    SurfaceZInCentimeters is Z * 100,
     string_concat('I will put this to the other ', Size, Stringpart1),
-    string_concat(Stringpart1, ' object on the shelf floor, which is ', Stringpart2),
-    string_concat(Stringpart2, _SurfaceZInCentimeters, Stringpart3),
-    string_concat(Stringpart3, ' centimeters above the ground.', Context).
+    string_concat(Stringpart1, ' object.', Context),
+%    string_concat(Stringpart1, ' object on the shelf floor, which is ', Stringpart2),
+%    string_concat(Stringpart2, SurfaceZInCentimeters, Stringpart3),
+%    string_concat(Stringpart3, ' centimeters above the ground.', Context).
+
+
 
 % Sort by color, if object class is OTHER
 object_goal_surface(Instance, Surface, Context) :-
@@ -85,7 +88,7 @@ object_goal_surface(Instance, Surface, Context) :-
     rdf_has(ShelfObj, hsr_objects:'colour', Color),
     object_current_surface(ShelfObj, Surface),
     surface_pose_in_map(Surface, [[_,_,Z],_]),
-    SurfaceZInCentimeters is Z * 100,
+%    SurfaceZInCentimeters is Z * 100,
     string_concat('I will put this to the other ', Color, Stringpart1),
     string_concat(Stringpart1, ' object.', Context).
 

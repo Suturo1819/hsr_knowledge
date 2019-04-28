@@ -77,9 +77,16 @@ object_goal_surface(Instance, Surface, Context) :-
     rdfs_type_of(Instance, hsr_objects:'Other'),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
-    object_color(Instance, Color),
-    object_color(ShelfObj, Color),
-    object_current_surface(ShelfObj, Surface).
+    rdf_has(Instance, hsr_objects:'colour', Color),
+    rdf_has(ShelfObj, hsr_objects:'colour', Color),
+    object_current_surface(ShelfObj, Surface),
+    surface_pose_in_map(Surface, [[_,_,Z],_]),
+    SurfaceZInCentimeters is Z * 100,
+    string_concat('I will put this to the other ', Color, Stringpart1),
+    string_concat(Stringpart1, ' object.', Context).
+%    string_concat(Stringpart1, ' object on the shelf floor, which is ', Stringpart2),
+%    string_concat(Stringpart2, SurfaceZInCentimeters, Stringpart3),
+%    string_concat(Stringpart3, ' centimeters above the ground.', Context).
 
 %% Same obj class
 object_goal_surface(Instance, Surface, Context) :-
@@ -87,7 +94,9 @@ object_goal_surface(Instance, Surface, Context) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Class),
-    object_current_surface(ShelfObj, Surface).
+    object_current_surface(ShelfObj, Surface),
+    rdf_split_url(_, CName, Class),
+    string_concat('I will put this to the other ', CName, Context).
 
 %% Same direct superclass
 object_goal_surface(Instance, Surface, Context) :-
@@ -96,7 +105,9 @@ object_goal_surface(Instance, Surface, Context) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Super),
-    object_current_surface(ShelfObj, Surface).
+    object_current_surface(ShelfObj, Surface),
+    rdf_split_url(_, CName, Super),
+    string_concat('I will put this to the other ', CName, Context).
 
 %% Same superclass 2 levels up
 object_goal_surface(Instance, Surface, Context) :-
@@ -106,17 +117,21 @@ object_goal_surface(Instance, Surface, Context) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Supersuper),
-    object_current_surface(ShelfObj, Surface).
+    object_current_surface(ShelfObj, Surface),
+    rdf_split_url(_, CName, SuperSuper),
+    string_concat('I will put this to the other ', CName, Context).
+
+
 
 %% If there's another object in the shelf with the same class, give same shelf
-object_goal_surface(Instance, Surface, Context) :-
-    all_objects_in_whole_shelf(ObjectsInShelf),
-    member(ObjectInShelf, ObjectsInShelf),
-    findall(SingleClass, (
-        rdfs_instance_of(ObjectInShelf, SingleClass)
-        ), [Class|_]),
-    rdfs_instance_of(Instance, Class),
-    object_current_surface(ObjectInShelf, Surface).
+%object_goal_surface(Instance, Surface, Context) :-
+%    all_objects_in_whole_shelf(ObjectsInShelf),
+%    member(ObjectInShelf, ObjectsInShelf),
+%    findall(SingleClass, (
+%        rdfs_instance_of(ObjectInShelf, SingleClass)
+%        ), [Class|_]),
+%    rdfs_instance_of(Instance, Class),
+%    object_current_surface(ObjectInShelf, Surface).
 
 %% If there is no corresponding class, take some shelf in the middle
 object_goal_surface(_, Surface, Context) :-
@@ -129,6 +144,9 @@ object_goal_surface(_, Surface) :-
     shelf_floors(ShelfFloors),
     member(Surface,ShelfFloors),
     objects_on_surface([], Surface).
+
+
+
 
 objects_on_surface(Instances, Surface) :-
     findall(Instance,

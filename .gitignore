@@ -56,3 +56,6 @@ CATKIN_IGNORE
 
 #protege
 catalog-v001.xml
+
+/object_state/splits/
+

@@ -3,12 +3,9 @@
     [
       create_object/2,
       object_at/4,
-      test_belief/0,
-      spawn_on_table/0,
       clear/0,
       object_at_table/1,
       object_of_type/2,
-      %semantically_closest_object/2,
       create_object_at/6,
       hsr_existing_objects/1
     ]).
@@ -33,8 +30,6 @@
 	object_at(r,r,r,?),
 	object_at_table(?),
 	object_of_type(r,?),
-	test_belief,
-	spawn_on_table,
 	create_object_at(r,r,r,?,-,-),
 	hsr_existing_objects(?).
 
@@ -57,13 +52,6 @@ object_at_table(Instance) :-
 object_of_type(ObjectType, Instance) :-
 	belief_existing_objects(Instance, [ObjectType]).
 
-%% Interface predicates %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%belief_new_object(hsr_objects:'Device', Inst),
-%X = 0.7, atom_number(X_atom,X),
-%object_assert_color(Inst, [X,X,X]),
-%belief_at_update(Inst, [map, _, [1,1,1],[0,0,0,1]]).
 
 create_object(ObjectType, Instance) :-
 %	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),

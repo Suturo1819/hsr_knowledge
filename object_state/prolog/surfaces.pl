@@ -2,6 +2,7 @@
     [
       object_current_surface/2,
       object_goal_pose/2,
+      object_goal_pose/3,
       object_goal_surface/2,
       object_goal_surface/3,
       objects_on_surface/2,
@@ -22,6 +23,7 @@
 :- rdf_meta
     object_current_surface(?,?),
     object_goal_pose(r,?),
+    object_goal_pose(r,?,?),
     object_goal_surface(r,?),
     object_goal_surface(r,?,?),
     objects_on_surface(?,r),
@@ -38,7 +40,10 @@ object_current_surface(Instance, Surface) :-
     rdf_has(Instance, hsr_objects:'supportedBy', Surface).
 
 object_goal_pose(Instance, [Translation, Rotation]) :-
-    object_goal_surface(Instance, Surface),
+    object_goal_pose(Instance, [Translation, Rotation], _).
+
+object_goal_pose(Instance, [Translation, Rotation], Context) :-
+    object_goal_surface(Instance, Surface, Context),
     surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
     member(XOffset, [0, -0.05, 0.05, -0.1, 0.1, -0.15, 0.15, -0.2, 0.2, -0.25, 0.25, -0.3, 0.3, 0.35, 0.35]),
     NewX is X + XOffset,    
@@ -46,7 +51,7 @@ object_goal_pose(Instance, [Translation, Rotation]) :-
     Translation = [NewX, Y, Z].
 
 
-object_goal_pose(_Instance, [Translation, Rotation]) :-
+object_goal_pose(_Instance, [Translation, Rotation], Context) :-
     shelf_floor_at_height(0.2, Surface),
     surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
     member(XOffset, [0, -0.05, 0.05, -0.1, 0.1, -0.15, 0.15, -0.2, 0.2, -0.25, 0.25, -0.3, 0.3, 0.35, 0.35]),

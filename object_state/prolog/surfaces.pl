@@ -50,13 +50,14 @@ object_goal_pose(Instance, [Translation, Rotation], Context) :-
     not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
     Translation = [NewX, Y, Z].
 
-object_goal_pose(_Instance, [Translation, Rotation], Context) :-
-    shelf_floor_at_height(0.2, Surface),
-    surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
-    member(XOffset, [0, -0.05, 0.05, -0.1, 0.1, -0.15, 0.15, -0.2, 0.2, -0.25, 0.25, -0.3, 0.3, 0.35, 0.35]),
-    NewX is X + XOffset,    
-    not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
-    Translation = [NewX, Y, Z].
+%%%%%%% Just a hack
+%object_goal_pose(_Instance, [Translation, Rotation], Context) :-
+%    shelf_floor_at_height(0.2, Surface),
+%    surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
+%    member(XOffset, [0, -0.05, 0.05, -0.1, 0.1, -0.15, 0.15, -0.2, 0.2, -0.25, 0.25, -0.3, 0.3, 0.35, 0.35]),
+%    NewX is X + XOffset,
+%    not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
+%    Translation = [NewX, Y, Z].
 
 object_goal_surface(Instance, Surface) :-
     object_goal_surface(Instance, Surface, _).

@@ -3,6 +3,7 @@
       object_current_surface/2,
       object_goal_pose/2,
       object_goal_surface/2,
+      object_goal_surface/3,
       objects_on_surface/2,
       assert_object_on/2,
       all_srdl_objects/1,
@@ -22,6 +23,7 @@
     object_current_surface(?,?),
     object_goal_pose(r,?),
     object_goal_surface(r,?),
+    object_goal_surface(r,?,?),
     objects_on_surface(?,r),
     assert_object_on(r,r),
     all_srdl_objects(?),
@@ -52,17 +54,26 @@ object_goal_pose(_Instance, [Translation, Rotation]) :-
     not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
     Translation = [NewX, Y, Z].
 
-% Sort by size if object class is OTHER
 object_goal_surface(Instance, Surface) :-
+    object_goal_surface(Instance, Surface, _).
+
+% Sort by size if object class is OTHER
+object_goal_surface(Instance, Surface, Context) :-
     rdfs_type_of(Instance, hsr_objects:'Other'),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdf_has(Instance, hsr_objects:'size', Size),
     rdf_has(ShelfObj, hsr_objects:'size', Size),
-    object_current_surface(ShelfObj, Surface).
+    object_current_surface(ShelfObj, Surface),
+    surface_pose_in_map(Surface, [[_,_,Z],_]),
+    SurfaceZInCentimeters is Z * 100,
+    string_concat('I will put this to the other ', Size, Stringpart1),
+    string_concat(Stringpart1, ' object on the shelf floor, which is ', Stringpart2),
+    string_concat(Stringpart2, SurfaceZInCentimeters, Stringpart3),
+    string_concat(Stringpart3, ' centimeters above the ground.', Context).
 
 % Sort by color, if object class is OTHER
-object_goal_surface(Instance, Surface) :-
+object_goal_surface(Instance, Surface, Context) :-
     rdfs_type_of(Instance, hsr_objects:'Other'),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
@@ -71,7 +82,7 @@ object_goal_surface(Instance, Surface) :-
     object_current_surface(ShelfObj, Surface).
 
 %% Same obj class
-object_goal_surface(Instance, Surface) :-
+object_goal_surface(Instance, Surface, Context) :-
     rdfs_type_of(Instance, Class),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
@@ -79,7 +90,7 @@ object_goal_surface(Instance, Surface) :-
     object_current_surface(ShelfObj, Surface).
 
 %% Same direct superclass
-object_goal_surface(Instance, Surface) :-
+object_goal_surface(Instance, Surface, Context) :-
     rdfs_type_of(Instance, Class),
     owl_direct_subclass_of(Class, Super),
     all_objects_in_whole_shelf(ShelfObjs),
@@ -88,7 +99,7 @@ object_goal_surface(Instance, Surface) :-
     object_current_surface(ShelfObj, Surface).
 
 %% Same superclass 2 levels up
-object_goal_surface(Instance, Surface) :-
+object_goal_surface(Instance, Surface, Context) :-
     rdfs_type_of(Instance, Class),
     owl_direct_subclass_of(Class, Super),
     owl_direct_subclass_of(Super, Supersuper),
@@ -98,7 +109,7 @@ object_goal_surface(Instance, Surface) :-
     object_current_surface(ShelfObj, Surface).
 
 %% If there's another object in the shelf with the same class, give same shelf
-object_goal_surface(Instance, Surface) :-
+object_goal_surface(Instance, Surface, Context) :-
     all_objects_in_whole_shelf(ObjectsInShelf),
     member(ObjectInShelf, ObjectsInShelf),
     findall(SingleClass, (
@@ -108,7 +119,7 @@ object_goal_surface(Instance, Surface) :-
     object_current_surface(ObjectInShelf, Surface).
 
 %% If there is no corresponding class, take some shelf in the middle
-object_goal_surface(_, Surface) :-
+object_goal_surface(_, Surface, Context) :-
     (shelf_floor_at_height(0.9, Surface);
     shelf_floor_at_height(0.6, Surface)),
     objects_on_surface([], Surface).

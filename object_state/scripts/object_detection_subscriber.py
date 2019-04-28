@@ -43,7 +43,7 @@ def callback(perceived_object_list):
         if str(data.region).endswith("table"):
             surface_query = 'table_surface(Surface),'
         elif "shelf" in region_splits:
-            rospy.loginfo("Asserting object on shelf floors " + region_splits)
+            rospy.loginfo("Asserting object on shelf floors " + str(region_splits))
             surface_query = "rdf_equal(Surface, 'http://knowrob.org/kb/robocup.owl#kitchen_description_shelf_floor_%s_piece')," \
                             % region_splits.pop()
         else:

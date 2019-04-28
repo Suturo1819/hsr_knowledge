@@ -74,8 +74,8 @@ set_dimension_semantics(Instance, Width, Depth, Height) :-
     Volume > 2.0,
     rdf_assert(Instance, hsr_objects:'size', 'big').
 
-set_dimension_semantics(_,_,_,_) :-
-    True.
+set_dimension_semantics(_Instance,_W,_D,_H) :-
+    true.
 
 set_object_colour(Instance, [0.0, 0.0, 0.0, 0.0]) :-
     object_assert_color(Instance, [0.8, 0.8, 0.8, 0.8]),

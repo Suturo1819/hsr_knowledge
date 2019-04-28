@@ -50,7 +50,6 @@ object_goal_pose(Instance, [Translation, Rotation], Context) :-
     not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
     Translation = [NewX, Y, Z].
 
-
 object_goal_pose(_Instance, [Translation, Rotation], Context) :-
     shelf_floor_at_height(0.2, Surface),
     surface_pose_in_map(Surface, [[X,Y,Z], Rotation]),
@@ -71,10 +70,10 @@ object_goal_surface(Instance, Surface, Context) :-
     rdf_has(ShelfObj, hsr_objects:'size', Size),
     object_current_surface(ShelfObj, Surface),
     surface_pose_in_map(Surface, [[_,_,Z],_]),
-    SurfaceZInCentimeters is Z * 100,
+    _SurfaceZInCentimeters is Z * 100,
     string_concat('I will put this to the other ', Size, Stringpart1),
     string_concat(Stringpart1, ' object on the shelf floor, which is ', Stringpart2),
-    string_concat(Stringpart2, SurfaceZInCentimeters, Stringpart3),
+    string_concat(Stringpart2, _SurfaceZInCentimeters, Stringpart3),
     string_concat(Stringpart3, ' centimeters above the ground.', Context).
 
 % Sort by color, if object class is OTHER
@@ -143,15 +142,15 @@ object_goal_surface(Instance, Surface, Context) :-
 object_goal_surface(_, Surface, Context) :-
     (shelf_floor_at_height(0.9, Surface);
     shelf_floor_at_height(0.6, Surface)),
-    objects_on_surface([], Surface).
+    objects_on_surface([], Surface),
+    Context = 'I will create a new group for this'.
 
 %% If middle shelves also occupied, take rest (lowest level first). WARNING: HSR may not be able to reach upper levels
-object_goal_surface(_, Surface) :-
+object_goal_surface(_, Surface, Context) :-
     shelf_floors(ShelfFloors),
     member(Surface,ShelfFloors),
-    objects_on_surface([], Surface).
-
-
+    objects_on_surface([], Surface),
+    Context = 'I will create a new group for this'.
 
 
 objects_on_surface(Instances, Surface) :-

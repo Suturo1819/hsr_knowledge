@@ -84,6 +84,7 @@ object_goal_surface(Instance, Surface, Context) :-
     SurfaceZInCentimeters is Z * 100,
     string_concat('I will put this to the other ', Color, Stringpart1),
     string_concat(Stringpart1, ' object.', Context).
+
 %    string_concat(Stringpart1, ' object on the shelf floor, which is ', Stringpart2),
 %    string_concat(Stringpart2, SurfaceZInCentimeters, Stringpart3),
 %    string_concat(Stringpart3, ' centimeters above the ground.', Context).
@@ -118,7 +119,7 @@ object_goal_surface(Instance, Surface, Context) :-
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Supersuper),
     object_current_surface(ShelfObj, Surface),
-    rdf_split_url(_, CName, SuperSuper),
+    rdf_split_url(_, CName, Supersuper),
     string_concat('I will put this to the other ', CName, Context).
 
 

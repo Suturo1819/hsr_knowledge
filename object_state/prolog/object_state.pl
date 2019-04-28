@@ -52,13 +52,12 @@ object_at_table(Instance) :-
 object_of_type(ObjectType, Instance) :-
 	belief_existing_objects(Instance, [ObjectType]).
 
-
 create_object(ObjectType, Instance) :-
-%	owl_subclass_of(ObjectType, knowrob:'EnduringThing-Localized'),
+ 	owl_subclass_of(ObjectType, hsr_objects:'Robocupitems'),
 	belief_new_object(ObjectType, Instance).
 
-
 create_object_at(ObjectType, Transform, Threshold, Instance, [Width, Depth, Height], [R,G,B,A]) :-
+    owl_subclass_of(ObjectType, hsr_objects:'Robocupitems'),
     new_perceived_at(ObjectType, Transform, Threshold, Instance),
     object_assert_dimensions(Instance, Width, Depth, Height),
     set_dimension_semantics(Instance, Width, Depth, Height),

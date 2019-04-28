@@ -51,12 +51,12 @@ def callback(perceived_object_list):
         filter_plane_noise_query = "{}" \
                                    "surface_pose_in_map(Surface, [[_,_,Z],_]), " \
                                    "ZOffset is {} - Z," \
-                                   "ZOffset > 0.025,".format(surface_query, z)
+                                   "ZOffset > 0.018.".format(surface_query, z)
 
         plane_solutions_raw = prolog.all_solutions(filter_plane_noise_query)
         print(plane_solutions_raw)
         if plane_solutions_raw:
-            print("Object is at valid height")
+            rospy.loginfo("Object is at valid height")
             query_string = (surface_query +
                             "create_object_at(hsr_objects:'" +
                             obj_class + "'," +
@@ -71,7 +71,7 @@ def callback(perceived_object_list):
             solutions = prolog.all_solutions(query_string)
             rospy.loginfo(solutions)
         else:
-            print("Invalid Z-pose of the object. IGNORING the object")
+            rospy.loginfo("Invalid Z-pose of the object. IGNORING the object")
 
 
 def listener():

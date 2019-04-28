@@ -48,22 +48,30 @@ def callback(perceived_object_list):
         else:
             rospy.loginfo("Issue with region: %s" % data.region)
 
+        filter_plane_noise_query = "{}" \
+                                   "surface_pose_in_map(Surface, [[_,_,Z],_]), " \
+                                   "ZOffset is {} - Z," \
+                                   "ZOffset > 0.025,".format(surface_query, z)
 
-
-
-        query_string = ("create_object_at(hsr_objects:'" +
-                        obj_class + "'," +
-                        "['" + source_frame +
-                        "', _, [" + ", ".join([x,y,z]) + "]," +
-                        "[" + ", ".join([qx,qy,qz,qw]) + "]]," +
-                        threshold + ", ObjectInstance," +
-                        "[" + ", ".join([depth,width,height]) + "], " +
-                        "[" + ", ".join([r,g,b,a]) + "])," +
-                        surface_query +
-                        "assert_object_on(ObjectInstance, Surface).")
-        rospy.loginfo('Send query: \n' + query_string)
-        solutions = prolog.all_solutions(query_string)
-        rospy.loginfo(solutions)
+        plane_solutions_raw = prolog.all_solutions(filter_plane_noise_query)
+        print(plane_solutions_raw)
+        if plane_solutions_raw:
+            print("Object is at valid height")
+            query_string = (surface_query +
+                            "create_object_at(hsr_objects:'" +
+                            obj_class + "'," +
+                            "['" + source_frame +
+                            "', _, [" + ", ".join([x,y,z]) + "]," +
+                            "[" + ", ".join([qx,qy,qz,qw]) + "]]," +
+                            threshold + ", ObjectInstance," +
+                            "[" + ", ".join([depth,width,height]) + "], " +
+                            "[" + ", ".join([r,g,b,a]) + "])," +
+                            "assert_object_on(ObjectInstance, Surface).")
+            rospy.loginfo('Send query: \n' + query_string)
+            solutions = prolog.all_solutions(query_string)
+            rospy.loginfo(solutions)
+        else:
+            print("Invalid Z-pose of the object. IGNORING the object")
 
 
 def listener():

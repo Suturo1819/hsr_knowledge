@@ -10,17 +10,6 @@
       hsr_existing_objects/1
     ]).
 
-/*:- use_module(library('lists')).
-:- use_module(library('semweb/rdfs')).
-:- use_module(library('semweb/rdf_db')).
-:- use_module(library('semweb/owl')).
-:- use_module(library('knowrob/owl')).
-:- use_module(library('knowrob/rdfs')).
-:- use_module(library('knowrob/temporal')).
-:- use_module(library('knowrob/transforms')).
-:- use_module(library('knowrob/objects')).
-*/
-
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
 :- rdf_db:rdf_register_ns(robocup, 'http://knowrob.org/kb/robocup.owl#', [keep(true)]).
 :- rdf_db:rdf_register_ns(srdl2_comp, 'http://knowrob.org/kb/srdl2-comp.owl#', [keep(true)]).
@@ -35,11 +24,7 @@
 
 
 hsr_existing_objects(Objects) :-
-    belief_existing_objects(Objects, [hsr_objects:'Robocupthings']).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Interface predicates %%
+    belief_existing_objects(Objects, [hsr_objects:'Robocupitems']).
 
 object_at(ObjectType, Transform, Threshold, Instance) :-
 	hsr_existing_objects(Objectlist),
@@ -89,6 +74,9 @@ set_dimension_semantics(Instance, Width, Depth, Height) :-
     Volume > 2.0,
     rdf_assert(Instance, hsr_objects:'size', 'big').
 
+set_dimension_semantics(_,_,_,_) :-
+    True.
+
 set_object_colour(Instance, [0.0, 0.0, 0.0, 0.0]) :-
     object_assert_color(Instance, [0.8, 0.8, 0.8, 0.8]),
     rdf_assert(Instance, hsr_objects:'colour', 'grey'), !.
@@ -123,16 +111,6 @@ set_colour_semantics(Instance, [0.0, 1.0, 1.0]) :-
 
 set_colour_semantics(Instance, [1.0, 1.0, 1.0]) :-
     rdf_assert(Instance, hsr_objects:'colour', 'bright').
-
-%spawn_on_table :-
-%	new_perceived_at(hsr_objects:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _).
-%
-%test_belief :-
-%	belief_perceived_at(hsr_objects:'Cup', ['map', _, [1,0,0.8],[0,0,0,1]], 0.2, _),
-%	object_at_table(Instance),
-%	object_of_type(hsr_objects:'Cup', Instances),
-%	member(Instance,Instances),
-%	clear.
 
 clear :-
 	belief_forget.

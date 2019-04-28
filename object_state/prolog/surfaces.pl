@@ -41,7 +41,7 @@ object_goal_pose(Instance, [Translation, Rotation]) :-
     member(XOffset, [0, -0.05, 0.05, -0.1, 0.1, -0.15, 0.15, -0.2, 0.2, -0.25, 0.25, -0.3, 0.3, 0.35, 0.35]),
     NewX is X + XOffset,    
     not(hsr_existing_object_at([map,_,[NewX, Y, Z + 0.1], Rotation], 0.2, _)),
-    Translation = [NewX, Y, Z], !.
+    Translation = [NewX, Y, Z].
 
 
 object_goal_pose(_Instance, [Translation, Rotation]) :-
@@ -59,7 +59,7 @@ object_goal_surface(Instance, Surface) :-
     member(ShelfObj, ShelfObjs),
     rdf_has(Instance, hsr_objects:'size', Size),
     rdf_has(ShelfObj, hsr_objects:'size', Size),
-    object_current_surface(ShelfObj, Surface), !.
+    object_current_surface(ShelfObj, Surface).
 
 % Sort by color, if object class is OTHER
 object_goal_surface(Instance, Surface) :-
@@ -68,7 +68,7 @@ object_goal_surface(Instance, Surface) :-
     member(ShelfObj, ShelfObjs),
     object_color(Instance, Color),
     object_color(ShelfObj, Color),
-    object_current_surface(ShelfObj, Surface), !.
+    object_current_surface(ShelfObj, Surface).
 
 %% Same obj class
 object_goal_surface(Instance, Surface) :-
@@ -76,7 +76,7 @@ object_goal_surface(Instance, Surface) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Class),
-    object_current_surface(ShelfObj, Surface), !.
+    object_current_surface(ShelfObj, Surface).
 
 %% Same direct superclass
 object_goal_surface(Instance, Surface) :-
@@ -85,7 +85,7 @@ object_goal_surface(Instance, Surface) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Super),
-    object_current_surface(ShelfObj, Surface), !.
+    object_current_surface(ShelfObj, Surface).
 
 %% Same superclass 2 levels up
 object_goal_surface(Instance, Surface) :-
@@ -95,7 +95,7 @@ object_goal_surface(Instance, Surface) :-
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Supersuper),
-    object_current_surface(ShelfObj, Surface), !.
+    object_current_surface(ShelfObj, Surface).
 
 %% If there's another object in the shelf with the same class, give same shelf
 object_goal_surface(Instance, Surface) :-
@@ -105,13 +105,13 @@ object_goal_surface(Instance, Surface) :-
         rdfs_instance_of(ObjectInShelf, SingleClass)
         ), [Class|_]),
     rdfs_instance_of(Instance, Class),
-    object_current_surface(ObjectInShelf, Surface), !.
+    object_current_surface(ObjectInShelf, Surface).
 
 %% If there is no corresponding class, take some shelf in the middle
 object_goal_surface(_, Surface) :-
     (shelf_floor_at_height(0.9, Surface);
     shelf_floor_at_height(0.6, Surface)),
-    objects_on_surface([], Surface), !.
+    objects_on_surface([], Surface).
 
 %% If middle shelves also occupied, take rest (lowest level first). WARNING: HSR may not be able to reach upper levels
 object_goal_surface(_, Surface) :-

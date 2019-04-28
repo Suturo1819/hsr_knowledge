@@ -94,7 +94,7 @@ set_dimension_semantics(Instance, Width, Depth, Height) :-
 
 set_dimension_semantics(Instance, Width, Depth, Height) :-
     Volume is Width * Depth * Height * 1000,
-    Volume < 1.0,
+    Volume < 0.6,
     rdf_assert(Instance, hsr_objects:'size', 'smallish').
 
 set_dimension_semantics(Instance, Width, Depth, Height) :-

@@ -48,8 +48,9 @@ if __name__ == '__main__':
             rospy.loginfo("Start perception call to regions %s" % str(sys.argv[1:]))
             result = perceive_client(sys.argv[1:])
         else:
-            rospy.logerr("No regions specified.")
-            rospy.logerr("Use 'robocup_table' oder 'robocup_shelf_0', 'robocup_shelf_1', etc.")
+            rospy.loginfo("No regions specified, defaulting to 'robocup_table'.")
+            rospy.loginfo("Argument: List of regions like robocup_shelf_0 robocup_shelf_1")
+            result = perceive_client(["robocup_table"])
         print("Result: ", ", ".join([str(n.obj_class) for n in result.detectionData]))
         print("Result: %s" % str(result.detectionData))
     except rospy.ROSInterruptException:

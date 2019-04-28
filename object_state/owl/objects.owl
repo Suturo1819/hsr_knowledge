@@ -766,6 +766,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Instantnoodles -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Instantnoodles">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Noodles"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Instantramennoodles -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/suturo/ontologies/2018/10/objects#Instantramennoodles">

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from time import sleep
 
 import rospy
 from json_prolog import json_prolog
@@ -73,6 +74,10 @@ def callback(perceived_object_list):
             rospy.loginfo(solutions)
         else:
             rospy.loginfo("Invalid Z-pose of the object. IGNORING object of class: " + obj_class)
+
+    sleep(3)
+    rospy.loginfo("Grouping objects.")
+    prolog.all_solutions("group_shelf_objects.")
 
 
 def listener():

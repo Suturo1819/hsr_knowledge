@@ -138,8 +138,8 @@ group_shelf_objects :-
     not(rdf_equal(Group1, _Group2)),
     rdf_has(Member, hsr_objects:'inGroup', Group1),
     rdf_retractall(Member, hsr_objects:'inGroup', _),
-    rdf_retractall(_, hsr_objects:'inGroup', Group1),
-    rdf_assert(Member, hsr_objects:'inGroup', _Group2).
+    rdf_assert(Member, hsr_objects:'inGroup', _Group2),
+    not(group_shelf_objects).
 
 %% Add these predicates because they are not exported in the corresponding modules
 belief_object_at_location(ObjectId, NewPose, Dmax) :-

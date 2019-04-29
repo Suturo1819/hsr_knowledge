@@ -128,7 +128,7 @@ merge_object_into_group(Instance) :-
 
 
 group_shelf_objects :-
-    all_objects_in_whole_shelf(_Objs),
+    all_objects_in_whole_shelf(Objs),
     member(Obj, Objs),
     current_object_pose(Obj, Transform),
     hsr_existing_object_at(Transform, 0.15, NearbyObj),

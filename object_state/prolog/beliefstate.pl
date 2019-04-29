@@ -123,22 +123,22 @@ merge_object_into_group(Instance) :-
         [Obj|Rest]),
     rdf_has(Obj, hsr_objects:'inGroup', WG),
     member(Other, Rest),
-    rdf_retractall(Other, hsr_objects:'inGroup', OtherGroup),
+    rdf_retractall(Other, hsr_objects:'inGroup', _),
     rdf_assert(Other, hsr_objects:'inGroup', WG).
 
 
 group_shelf_objects :-
     all_objects_in_whole_shelf(_Objs),
-    member(Obj, _Objs),
-    current_object_pose(Obj, _Transform),
-    hsr_existing_object_at(_Transform, 0.15, NearbyObj),
+    member(Obj, Objs),
+    current_object_pose(Obj, Transform),
+    hsr_existing_object_at(Transform, 0.15, NearbyObj),
     rdf_has(Obj, hsr_objects:'inGroup', Group1),
-    rdf_has(NearbyObj, hsr_objects:'inGroup', _Group2),
+    rdf_has(NearbyObj, hsr_objects:'inGroup', Group2),
     not(rdf_equal(Obj, NearbyObj)),
-    not(rdf_equal(Group1, _Group2)),
+    not(rdf_equal(Group1, Group2)),
     rdf_has(Member, hsr_objects:'inGroup', Group1),
     rdf_retractall(Member, hsr_objects:'inGroup', _),
-    rdf_assert(Member, hsr_objects:'inGroup', _Group2),
+    rdf_assert(Member, hsr_objects:'inGroup', Group2),
     not(group_shelf_objects).
 
 %% Add these predicates because they are not exported in the corresponding modules

@@ -141,6 +141,31 @@ group_shelf_objects :-
     rdf_assert(Member, hsr_objects:'inGroup', Group2),
     not(group_shelf_objects).
 
+group_mean_pose(Group, Transform, Rotation) :-
+    findall(X, (
+        rdf_has(Member, hsr_objects:'inGroup', Group),
+        current_object_pose(Member, [_,_,[X,_,_],_])),
+    Xs),
+    findall(Y, (
+        rdf_has(Member, hsr_objects:'inGroup', Group),
+        current_object_pose(Member, [_,_,[_,Y,_],_])),
+    Ys),
+    findall(Z, (
+        rdf_has(Member, hsr_objects:'inGroup', Group),
+        current_object_pose(Member, [_,_,[_,_,Z],_])),
+    Zs),
+    sumlist(Xs, Xtotal),
+    sumlist(Ys, Ytotal),
+    sumlist(Zs,Ztotal),
+    length(Xs, L),
+    Xmean is Xtotal / L,
+    Ymean is Ytotal / L,
+    Zmean is Ztotal / L,
+    Transform = [Xmean, Ymean, Zmean],
+    once(rdf_has(Member, hsr_objects:'inGroup', Group)),
+    object_current_surface(Member, Surface),
+    surface_pose_in_map(Surface, [_, Rotation]).
+
 %% Add these predicates because they are not exported in the corresponding modules
 belief_object_at_location(ObjectId, NewPose, Dmax) :-
     belief_at_id(ObjectId, OldPose),

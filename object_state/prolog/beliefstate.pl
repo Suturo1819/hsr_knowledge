@@ -8,7 +8,9 @@
       select_surface/2,
       belief_object_at_location/3,
       belief_class_of/2,
-      hsr_belief_at_update/2
+      hsr_belief_at_update/2,
+      merge_object_into_group/1,
+      group_shelf_objects/0
     ]).
 
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
@@ -24,7 +26,9 @@
     select_surface(r,?),
     belief_object_at_location(r,+,+),
     belief_class_of(r,r),
-    hsr_belief_at_update(r,r).
+    hsr_belief_at_update(r,r),
+    merge_object_into_group(r),
+    group_shelf_objects.
 
 gripper(Gripper) :-
     belief_existing_objects([Gripper|_]), ! .
@@ -84,34 +88,58 @@ select_surface([X,Y,Z], Surface) :-
 
 
 % Object placed between two groups
-hsr_belief_at_update(Instance, Transform) :-
-    findall(NearbyGroup, (
-        not(rdf_equal(Instance, NearbyObject)),
-        hsr_existing_object_at(Transform, 0.2, NearbyObject),
-        rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup)
-        ), [GroupA, GroupB]),
-    owl_instance_from_class(hsr_objects:'Group', NewGroup),
-    (rdf_has(GroupMember, hsr_objects:'inGroup', GroupA);
-     rdf_has(GroupMember, hsr_objects:'inGroup', GroupB)),
-    rdf_retractall(GroupMember, hsr_objects:'inGroup', _),
-    rdf_assert(GroupMember, hsr_objects:'inGroup', NewGroup),
-    rdf_assert(Instance, hsr_objects:'inGroup', NewGroup),
-    belief_at_update(Instance, Transform), !.
+%hsr_belief_at_update(Instance, Transform) :-
+%    findall(NearbyGroup, (
+%        not(rdf_equal(Instance, NearbyObject)),
+%        hsr_existing_object_at(Transform, 0.2, NearbyObject),
+%        rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup)
+%        ), [GroupA, GroupB]),
+%    owl_instance_from_class(hsr_objects:'Group', NewGroup),
+%    (rdf_has(GroupMember, hsr_objects:'inGroup', GroupA);
+%     rdf_has(GroupMember, hsr_objects:'inGroup', GroupB)),
+%    rdf_retractall(GroupMember, hsr_objects:'inGroup', _),
+%    rdf_assert(GroupMember, hsr_objects:'inGroup', NewGroup),
+%    rdf_assert(Instance, hsr_objects:'inGroup', NewGroup),
+%    belief_at_update(Instance, Transform), !.
 
 % Object placed nearby a group
-hsr_belief_at_update(Instance, Transform) :-
-    not(rdf_equal(Instance, NearbyObject)),
-    hsr_existing_object_at(Transform, 0.2, NearbyObject),
-    rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup),
-    rdf_assert(Instance, hsr_objects:'inGroup', NearbyGroup),
-    belief_at_update(Instance, Transform), !.
+%hsr_belief_at_update(Instance, Transform) :-
+%    not(rdf_equal(Instance, NearbyObject)),
+%    hsr_existing_object_at(Transform, 0.2, NearbyObject),
+%    rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup),
+%    rdf_assert(Instance, hsr_objects:'inGroup', NearbyGroup),
+%    belief_at_update(Instance, Transform), !.
 
 % No groups nearby
 hsr_belief_at_update(Instance, Transform) :-
     owl_instance_from_class(hsr_objects:'Group', Group),
     rdf_assert(Instance, hsr_objects:'inGroup', Group),
-    belief_at_update(Instance, Transform), !.
+    belief_at_update(Instance, Transform).
 
+merge_object_into_group(Instance) :-
+    current_object_pose(Instance, Transform),
+    findall(NearbyObj, (
+        hsr_existing_object_at(Transform, 0.15, NearbyObj)),
+        [Obj|Rest]),
+    rdf_has(Obj, hsr_objects:'inGroup', WG),
+    member(Other, Rest),
+    rdf_retractall(Other, hsr_objects:'inGroup', OtherGroup),
+    rdf_assert(Other, hsr_objects:'inGroup', WG).
+
+
+group_shelf_objects :-
+    all_objects_in_whole_shelf(_Objs),
+    member(Obj, _Objs),
+    current_object_pose(Obj, _Transform),
+    hsr_existing_object_at(_Transform, 0.15, NearbyObj),
+    rdf_has(Obj, hsr_objects:'inGroup', Group1),
+    rdf_has(NearbyObj, hsr_objects:'inGroup', _Group2),
+    not(rdf_equal(Obj, NearbyObj)),
+    not(rdf_equal(Group1, _Group2)),
+    rdf_has(Member, hsr_objects:'inGroup', Group1),
+    rdf_retractall(Member, hsr_objects:'inGroup', _),
+    rdf_retractall(_, hsr_objects:'inGroup', Group1),
+    rdf_assert(Member, hsr_objects:'inGroup', _Group2).
 
 %% Add these predicates because they are not exported in the corresponding modules
 belief_object_at_location(ObjectId, NewPose, Dmax) :-

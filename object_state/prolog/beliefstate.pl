@@ -10,7 +10,8 @@
       belief_class_of/2,
       hsr_belief_at_update/2,
       merge_object_into_group/1,
-      group_shelf_objects/0
+      group_shelf_objects/0,
+      group_mean_pose/3
     ]).
 
 :- rdf_db:rdf_register_ns(hsr_objects, 'http://www.semanticweb.org/suturo/ontologies/2018/10/objects#', [keep(true)]).
@@ -28,7 +29,8 @@
     belief_class_of(r,r),
     hsr_belief_at_update(r,r),
     merge_object_into_group(r),
-    group_shelf_objects.
+    group_shelf_objects,
+    group_mean_pose(r,?,?).
 
 gripper(Gripper) :-
     belief_existing_objects([Gripper|_]), ! .
@@ -73,7 +75,8 @@ release_object_from_gripper :-
     hsr_belief_at_update(Instance, [map, _, [X,Y,Z], Rotation]),
     rdf_retractall(Instance, hsr_objects:'supportedBy', _),
     select_surface([X,Y,Z], Surface),
-    rdf_assert(Instance, hsr_objects:'supportedBy', Surface).
+    rdf_assert(Instance, hsr_objects:'supportedBy', Surface),
+    group_shelf_objects.
 
 select_surface([X,Y,Z], Surface) :-
     table_surface(Table),
@@ -85,30 +88,6 @@ select_surface([X,Y,Z], Surface) :-
     DShelf is sqrt((SX-X)*(SX-X) + (SY-Y)*(SY-Y)),
     ((DShelf < DTable, shelf_floor_at_height(Z, Surface));
     rdf_equal(Surface, Table)), ! .
-
-
-% Object placed between two groups
-%hsr_belief_at_update(Instance, Transform) :-
-%    findall(NearbyGroup, (
-%        not(rdf_equal(Instance, NearbyObject)),
-%        hsr_existing_object_at(Transform, 0.2, NearbyObject),
-%        rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup)
-%        ), [GroupA, GroupB]),
-%    owl_instance_from_class(hsr_objects:'Group', NewGroup),
-%    (rdf_has(GroupMember, hsr_objects:'inGroup', GroupA);
-%     rdf_has(GroupMember, hsr_objects:'inGroup', GroupB)),
-%    rdf_retractall(GroupMember, hsr_objects:'inGroup', _),
-%    rdf_assert(GroupMember, hsr_objects:'inGroup', NewGroup),
-%    rdf_assert(Instance, hsr_objects:'inGroup', NewGroup),
-%    belief_at_update(Instance, Transform), !.
-
-% Object placed nearby a group
-%hsr_belief_at_update(Instance, Transform) :-
-%    not(rdf_equal(Instance, NearbyObject)),
-%    hsr_existing_object_at(Transform, 0.2, NearbyObject),
-%    rdf_has(NearbyObject, hsr_objects:'inGroup', NearbyGroup),
-%    rdf_assert(Instance, hsr_objects:'inGroup', NearbyGroup),
-%    belief_at_update(Instance, Transform), !.
 
 % No groups nearby
 hsr_belief_at_update(Instance, Transform) :-
@@ -131,7 +110,7 @@ group_shelf_objects :-
     all_objects_in_whole_shelf(Objs),
     member(Obj, Objs),
     current_object_pose(Obj, Transform),
-    hsr_existing_object_at(Transform, 0.1, NearbyObj),
+    hsr_existing_object_at(Transform, 0.15, NearbyObj),
     rdf_has(Obj, hsr_objects:'inGroup', Group1),
     rdf_has(NearbyObj, hsr_objects:'inGroup', Group2),
     not(rdf_equal(Obj, NearbyObj)),

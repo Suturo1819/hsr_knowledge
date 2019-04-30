@@ -30,7 +30,7 @@ def callback(perceived_object_list):
         g = str(data.color.g)
         b = str(data.color.b)
         a = str(data.color.a)
-
+        volume = float(data.depth) * float(data.width) * float(data.height) * 1000
         x = str(data.pose.pose.position.x)
         y = str(data.pose.pose.position.y)
         z = str(data.pose.pose.position.z)
@@ -56,9 +56,13 @@ def callback(perceived_object_list):
                                    "ZOffset > 0.015.".format(surface_query, z)
 
         plane_solutions_raw = prolog.all_solutions(filter_plane_noise_query)
-        print(plane_solutions_raw)
-        if plane_solutions_raw:
-            rospy.loginfo("Object is at valid height")
+        # print(plane_solutions_raw)
+        if not plane_solutions_raw:
+            rospy.loginfo("Invalid Z-pose of the object. Would be under or in the surface.")
+        if not volume < 5.0:
+            rospy.loginfo("Volume: {} is too high to be a valid object.".format(volume))
+        if plane_solutions_raw and volume < 7.0:
+            rospy.loginfo("Object is at valid height and of valid volume")
             query_string = (surface_query +
                             "create_object_at(hsr_objects:'" +
                             obj_class + "'," +
@@ -73,7 +77,7 @@ def callback(perceived_object_list):
             solutions = prolog.all_solutions(query_string)
             rospy.loginfo(solutions)
         else:
-            rospy.loginfo("Invalid Z-pose of the object. IGNORING object of class: " + obj_class)
+            rospy.loginfo("IGNORING object of class: " + obj_class)
 
     sleep(3)
     rospy.loginfo("Grouping objects.")

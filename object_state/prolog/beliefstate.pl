@@ -131,7 +131,7 @@ group_shelf_objects :-
     all_objects_in_whole_shelf(Objs),
     member(Obj, Objs),
     current_object_pose(Obj, Transform),
-    hsr_existing_object_at(Transform, 0.15, NearbyObj),
+    hsr_existing_object_at(Transform, 0.1, NearbyObj),
     rdf_has(Obj, hsr_objects:'inGroup', Group1),
     rdf_has(NearbyObj, hsr_objects:'inGroup', Group2),
     not(rdf_equal(Obj, NearbyObj)),

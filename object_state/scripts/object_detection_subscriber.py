@@ -61,7 +61,7 @@ def callback(perceived_object_list):
             rospy.loginfo("Invalid Z-pose of the object. Would be under or in the surface.")
         if not volume < 5.0:
             rospy.loginfo("Volume: {} is too high to be a valid object.".format(volume))
-        if plane_solutions_raw and volume < 7.0:
+        if plane_solutions_raw and volume < 8.0:
             rospy.loginfo("Object is at valid height and of valid volume")
             query_string = (surface_query +
                             "create_object_at(hsr_objects:'" +

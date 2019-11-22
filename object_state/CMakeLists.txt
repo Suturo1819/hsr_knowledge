@@ -4,7 +4,7 @@ project(object_state)
 
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  json_prolog
+  rosprolog
   json_prolog_msgs
   knowrob_common
   rosjava_build_tools

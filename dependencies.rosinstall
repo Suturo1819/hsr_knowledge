@@ -18,7 +18,7 @@
 - git:
     local-name: pr2_kinematics
     uri: https://github.com/code-iai/pr2_kinematics.git
-    version: kinetic-devel
+    version: f06de772db646d2e0f6a4414da510536d5b29919
 - git:
     local-name: suturo_msgs
     uri: https://github.com/Suturo1819/suturo_msgs.git

@@ -2,16 +2,16 @@
 from time import sleep
 
 import rospy
-from json_prolog import json_prolog
+import rosprolog_client
 import suturo_perception_msgs.msg as message
 from std_msgs.msg import ColorRGBA
 
-prolog = json_prolog.Prolog()
+prolog = rosprolog_client.Prolog()
 
 
 def callback(perceived_object_list):
     for data in perceived_object_list.result.detectionData:
-        rospy.wait_for_service('/json_prolog/query')
+        rospy.wait_for_service('/rosprolog/query')
 
         obj_class = str(data.obj_class)
         if obj_class and float(data.confidence) > 0.5:
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 #
 #     def callback(self, perceived_object_list):
 #         for data in perceived_object_list.result.detectionData:
-#             rospy.wait_for_service('/json_prolog/query')
+#             rospy.wait_for_service('/rosprolog/query')
 #
 #             obj_class = str(data.obj_class)
 #             if obj_class:

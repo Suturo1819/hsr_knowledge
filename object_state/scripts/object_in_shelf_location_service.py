@@ -2,10 +2,10 @@
 
 import rospy
 from suturo_knowledge_msgs.srv import *
-from json_prolog import json_prolog
+import rosprolog_client
 import tf
 
-prolog = json_prolog.Prolog()
+prolog = rosprolog_client.Prolog()
 
 
 def handle_object_location_in_shelf(request):
@@ -40,8 +40,8 @@ def safe_lookup_transform(source_frame, duration=rospy.Duration(3)):
 
 def object_location_in_shelf():
     rospy.init_node('shelf_location_service_node')
-    rospy.loginfo("Waiting for json_prolog.")
-    rospy.wait_for_service('json_prolog/query')
+    rospy.loginfo("Waiting for rosprolog.")
+    rospy.wait_for_service('/rosprolog/query')
     rospy.loginfo("Starting 'object_location_in_shelf' service.")
     rospy.Service('object_location_in_shelf', ObjectLocationInShelf, handle_object_location_in_shelf)
     rospy.spin()

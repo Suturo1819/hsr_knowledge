@@ -4,12 +4,12 @@ import numpy as np
 import rospy
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64
-from json_prolog import json_prolog
+import rosprolog_client
 import tmc_msgs.msg
 import actionlib
 import tf2_ros
 
-prolog = json_prolog.Prolog()
+prolog = rosprolog_client.Prolog()
 sec_in_nanos = 1000000000
 
 

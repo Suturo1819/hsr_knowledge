@@ -4,15 +4,15 @@ import rospy
 import os
 import yaml
 from rospkg import RosPack
-from json_prolog import json_prolog
+import rosprolog_client
 
+prolog = rosprolog_client.Prolog()
 rospack = RosPack()
-prolog = json_prolog.Prolog()
 
 
 def check_caffe_config_yaml(package='object_state', path='/splits/uw_rgbd_ds_extension_1objPerClass.yaml'):
-    rospy.loginfo("Waiting for json_prolog.")
-    rospy.wait_for_service('/json_prolog/query')
+    rospy.loginfo("Waiting for rosprolog.")
+    rospy.wait_for_service('/rosprolog/query')
     file_path = rospack.get_path(package) + path
     caffe_splits_names = []
 

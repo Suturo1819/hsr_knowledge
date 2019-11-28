@@ -43,7 +43,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES object_state
-#  CATKIN_DEPENDS geometry_msgs json_prolog json_prolog_msgs knowrob_common rosjava_build_tools rosjava_messages rospy
+#  CATKIN_DEPENDS geometry_msgs rosprolog json_prolog_msgs knowrob_common rosjava_build_tools rosjava_messages rospy
 #  DEPENDS system_lib
 )
 

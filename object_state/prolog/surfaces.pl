@@ -214,9 +214,10 @@ all_objects_in_whole_shelf(Instance) :-
 surface_pose_in_map(Surface, [Translation, Rotation]) :-
     rdf_has(Surface, srdl2_comp:'urdfName', literal(UrdfName)),
     string_concat('environment/', UrdfName, Frame),
-    tf_lookup_transform(map, Frame, PoseTerm),
-    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
-    transform_data(Pose,(Translation, Rotation)).
+%    tf_lookup_transform(map, Frame, PoseTerm),
+    tf_lookup_transform(map, Frame, pose(Translation, Rotation)).
+%    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),
+%    transform_data(Pose,(Translation, Rotation)).
 
 
 

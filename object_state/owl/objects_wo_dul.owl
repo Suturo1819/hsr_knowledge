@@ -76,15 +76,7 @@
 
     <!-- http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized -->
 
-    <owl:Class rdf:about="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject -->
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    <owl:Class rdf:about="http://ias.cs.tum.edu/kb/knowrob.owl#EnduringThing-Localized"/>
     
 
 

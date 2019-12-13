@@ -90,7 +90,7 @@ object_goal_surface(Instance, Surface, Context) :-
 
 % Sort by size if object class is OTHER
 object_goal_surface(Instance, Surface, Context, ShelfObj) :-
-    rdfs_type_of(Instance, hsr_objects:'Other'),
+    kb_type_of(Instance, hsr_objects:'Other'),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdf_has(Instance, hsr_objects:'size', Size),
@@ -101,7 +101,7 @@ object_goal_surface(Instance, Surface, Context, ShelfObj) :-
 
 % Sort by color, if object class is OTHER
 object_goal_surface(Instance, Surface, Context, ShelfObj) :-
-    rdfs_type_of(Instance, hsr_objects:'Other'),
+    kb_type_of(Instance, hsr_objects:'Other'),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdf_has(Instance, hsr_objects:'colour', Color),
@@ -112,7 +112,7 @@ object_goal_surface(Instance, Surface, Context, ShelfObj) :-
 
 %% Same obj class
 object_goal_surface(Instance, Surface, Context, ShelfObj) :-
-    rdfs_type_of(Instance, Class),
+    kb_type_of(Instance, Class),
     all_objects_in_whole_shelf(ShelfObjs),
     member(ShelfObj, ShelfObjs),
     rdfs_instance_of(ShelfObj, Class),
@@ -122,7 +122,7 @@ object_goal_surface(Instance, Surface, Context, ShelfObj) :-
 
 %% Same direct superclass
 object_goal_surface(Instance, Surface, Context, ShelfObj) :-
-    rdfs_type_of(Instance, Class),
+    kb_type_of(Instance, Class),
     owl_direct_subclass_of(Class, Super),
     not(rdf_equal(Super, hsr_objects:'Robocupitems')),
     all_objects_in_whole_shelf(ShelfObjs),
@@ -134,7 +134,7 @@ object_goal_surface(Instance, Surface, Context, ShelfObj) :-
 
 %% Same superclass 2 levels up
 object_goal_surface(Instance, Surface, Context, ShelfObj) :-
-    rdfs_type_of(Instance, Class),
+    kb_type_of(Instance, Class),
     owl_direct_subclass_of(Class, Super),
     not(rdf_equal(Super, hsr_objects:'Robocupitems')),
     owl_direct_subclass_of(Super, Supersuper),
@@ -172,8 +172,8 @@ objects_on_surface(Instances, Surface) :-
 assert_object_on(Instance, Surface) :-
     all_srdl_objects(Surfaces),
     member(Surface,Surfaces),
-    rdf_retractall(Instance, hsr_objects:'supportedBy', _),
-    rdf_assert(Instance, hsr_objects:'supportedBy', Surface).
+    kb_retract(Instance, hsr_objects:'supportedBy', _),
+    kb_assert(Instance, hsr_objects:'supportedBy', Surface).
 
 all_srdl_objects(Surfaces) :-
     findall(Surface,
@@ -184,7 +184,9 @@ shelf_floors(ShelfFloors) :-
     findall(ShelfFloor, (
         all_srdl_objects(Surfaces),
         member(ShelfFloor, Surfaces),
-        rdf_has_prolog(ShelfFloor, srdl2_comp:'urdfName', UrdfName),
+        object_frame_name(ShelfFloor, UrdfFrame),
+        string_concat('kitchen_description_', UrdfName, UrdfFrame),
+%        kb_triple(ShelfFloor, srdl2_comp:'urdfName', UrdfName),
         atom_concat('shelf_floor',_,UrdfName)
         ), ShelfFloors).
 
@@ -192,8 +194,12 @@ shelf_floor_at_height(Height, TargetShelf) :-
     findall(ShelfFloor, (
         shelf_floors(AllFloors),
         member(ShelfFloor, AllFloors),
-        srdl_matrix(ShelfFloor, M),
-        matrix(M, [_, _, Z], _),
+        object_frame_name(ShelfFloor,Frame),
+        string_concat('kitchen_description_', FrameName, Frame),
+        string_concat('environment/', FrameName, TFFrame),
+        tf_lookup_transform('map', TFFrame, pose([_,_,Z], _)),
+%        srdl_matrix(ShelfFloor, M),
+%        matrix(M, [_, _, Z], _),
         Z < Height
     ), ShelfFloors),
     reverse(ShelfFloors, [TargetShelf|_]).
@@ -212,8 +218,10 @@ all_objects_in_whole_shelf(Instance) :-
         ), Instance).
 
 surface_pose_in_map(Surface, [Translation, Rotation]) :-
-    rdf_has(Surface, srdl2_comp:'urdfName', literal(UrdfName)),
-    string_concat('environment/', UrdfName, Frame),
+    object_frame_name(Surface, UrdfName),
+%    rdf_has(Surface, srdl2_comp:'urdfName', literal(UrdfName)),
+    string_concat('kitchen_description_', FrameSuffix, UrdfName),
+    string_concat('environment/', FrameSuffix, Frame),
 %    tf_lookup_transform(map, Frame, PoseTerm),
     tf_lookup_transform(map, Frame, pose(Translation, Rotation)).
 %    owl_instance_from_class(knowrob:'Pose', [pose=PoseTerm], Pose),

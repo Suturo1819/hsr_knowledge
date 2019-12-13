@@ -46,9 +46,9 @@ create_object_at(ObjectType, Transform, Threshold, Instance, [Width, Depth, Heig
     new_perceived_at(ObjectType, Transform, Threshold, Instance),
     object_assert_dimensions(Instance, Width, Depth, Height),
     set_dimension_semantics(Instance, Width, Depth, Height),
-    set_object_colour(Instance, [R,G,B,A]),
-    hsr_existing_objects(Objects),
-    belief_republish_objects(Objects).
+    set_object_colour(Instance, [R,G,B,A]).
+%    hsr_existing_objects(Objects),
+%    belief_republish_objects(Objects).
 
 set_dimension_semantics(Instance, _, _, Height) :-
     Height > 0.16,

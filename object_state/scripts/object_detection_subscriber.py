@@ -50,25 +50,27 @@ def callback(perceived_object_list):
         else:
             rospy.loginfo("Issue with region: %s" % data.region)
 
-        filter_plane_noise_query = "{}" \
-                                   "surface_pose_in_map(Surface, [[_,_,Z],_]), " \
-                                   "ZOffset is {} - Z," \
-                                   "ZOffset > 0.015.".format(surface_query, z)
+        # rospy.loginfo(prolog.all_solutions(surface_query + " true."))
 
-        plane_solutions_raw = prolog.all_solutions(filter_plane_noise_query)
-        # print(plane_solutions_raw)
+        # filter_plane_noise_query = "{}" \
+        #                            "surface_pose_in_map(Surface, [[_,_,Z],_]), " \
+        #                            "ZOffset is {} - Z," \
+        #                            "ZOffset > 0.015.".format(surface_query, z)
+        #
+        # plane_solutions_raw = prolog.all_solutions(filter_plane_noise_query)
+        # # print(plane_solutions_raw)
         valid = True
-        if not plane_solutions_raw:
-            rospy.loginfo("Invalid Z-pose of the object. Would be under or in the surface.")
-            valid = False
-        # if not volume < 8.0:
-        #     rospy.loginfo("Volume: {} is too high to be a valid object.".format(volume))
+        # if not plane_solutions_raw:
+        #     rospy.loginfo("Invalid Z-pose of the object. Would be under or in the surface.")
         #     valid = False
-        if float(data.depth) > 0.3 or float(data.width) > 0.3 or float(data.height) > 0.3:
-            rospy.loginfo("One of the dimensions is bigger than 30 cm.")
-            valid = False
+        # # if not volume < 8.0:
+        # #     rospy.loginfo("Volume: {} is too high to be a valid object.".format(volume))
+        # #     valid = False
+        # if float(data.depth) > 0.3 or float(data.width) > 0.3 or float(data.height) > 0.3:
+        #     rospy.loginfo("One of the dimensions is bigger than 30 cm.")
+        #     valid = False
         if valid:
-            rospy.loginfo("Object is at valid height and of valid volume")
+            # rospy.loginfo("Object is at valid height and of valid volume")
             query_string = (surface_query +
                             "create_object_at(hsr_objects:'" +
                             obj_class + "'," +

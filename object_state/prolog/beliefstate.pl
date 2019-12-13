@@ -91,7 +91,8 @@ select_surface([X,Y,Z], Surface) :-
 
 % No groups nearby
 hsr_belief_at_update(Instance, Transform) :-
-    owl_instance_from_class(hsr_objects:'Group', Group),
+    kb_create(hsr_objects:'Group', Group, _{graph:groups}),
+%    owl_instance_from_class(hsr_objects:'Group', Group),
     rdf_assert(Instance, hsr_objects:'inGroup', Group),
     belief_at_update(Instance, Transform).
 
@@ -143,16 +144,18 @@ group_mean_pose(Group, Transform, Rotation) :-
     Transform = [Xmean, Ymean, Zmean],
     once(rdf_has(Member, hsr_objects:'inGroup', Group)),
     object_current_surface(Member, Surface),
-    surface_pose_in_map(Surface, [_, Rotation]).
+    surface_pose_in_map(Surface, [_, Rotation]),
+    object_frame_name(Group, Frame),
+    object_pose_update(Group, ['map', Frame, Transform, Rotation]).
 
 %% Add these predicates because they are not exported in the corresponding modules
 belief_object_at_location(ObjectId, NewPose, Dmax) :-
-    belief_at_id(ObjectId, OldPose),
+    object_pose(ObjectId, OldPose),
     transform_close_to(NewPose, OldPose, Dmax).
 
 belief_class_of(Obj, ObjType) :-
     % nothing to do if current classification matches beliefs
-    rdfs_type_of(Obj, ObjType), !.
+    kb_type_of(Obj, ObjType), !.
 
 belief_class_of(Obj, NewObjType) :-
     current_time(Now),

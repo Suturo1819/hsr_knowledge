@@ -23,3 +23,7 @@
     local-name: suturo_msgs
     uri: https://github.com/Suturo1819/suturo_msgs.git
     version: master
+- git:
+    local-name: suturo_msgs
+    uri: https://github.com/Suturo1819/hsr_knowledge.git
+    version: knowrob-update
